@@ -1,0 +1,19 @@
+{
+  "name": "rotten-tomatos",
+  "version": "1.0.0",
+  "description": "Rotten Tomatos Exercise",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dumihuvud/1dv023.git"
+  },
+  "author": "Eugene Ganshin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dumihuvud/1dv023/issues"
+  },
+  "homepage": "https://github.com/dumihuvud/1dv023#readme"
+}
