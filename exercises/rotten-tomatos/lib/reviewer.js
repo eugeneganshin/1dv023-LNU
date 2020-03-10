@@ -24,10 +24,13 @@ const readFile = (path, options) => {
 const getAverage = async () => {
   const parser = new xml2js.Parser()
   const text = await readFile(imdbPath, 'utf-8')
-  const data = JSON.parse(text)
-  console.log(typeof (data))
+  let data = text.startsWith('<?xml')
+    ? (await parser.parseStringPromise(text)).movies.movies
+    : JSON.parse(text)
+  data = data.map(m => m.rating).reduce((a, b) => a + Number(b), 0) / data.length
+  console.log(data)
 }
 
-readFile(imdbPath, 'utf-8')
-// getAverage()
+// readFile(imdbPath, 'utf-8')
+getAverage()
 module.exports.readFile = readFile
