@@ -1,35 +1,21 @@
-// npm start https://nodejs.org/en/ https://developer.mozilla.org/en-US/
-// so here we need a function that would open both websotes and scrap it
-// and create a set of links
+const path = require('path')
+const fs = require('fs-extra')
+const { getLinks } = require('./lib/scrape')
 
-// function scrape should take one parameter
-// map this parameter to get two urls
+const pathToFile = path.resolve('data', 'links.json')
+const links = ['https://nodejs.org/en/', 'https://developer.mozilla.org/en-US/']
 
-const fetch = require('node-fetch')
-
-const jsdom = require('jsdom')
-const { JSDOM } = jsdom
-
-const nodeLink = 'https://nodejs.org/en/'
-const mozillaLink = 'https://developer.mozilla.org/en-US/'
-const urls = ['https://nodejs.org/en/', 'https://developer.mozilla.org/en-US/']
-
-const getText = async url => {
+const test = async () => {
   try {
-    const response = await fetch(url)
-    const data = await response.text()
-    return data
-  } catch (err) {
-    console.error(err)
+    const existingLinksPromise = fs.readJson(pathToFile).catch(error => [])
+    const scrapedLinksPromise = getLinks(links)
+
+    const data = await Promise.all([existingLinksPromise, scrapedLinksPromise].flat())
+    const set = [...(new Set(data.flat()))].sort()
+    await fs.writeJson(pathToFile, set, { spaces: 4 })
+  } catch (error) {
+    console.error(error)
   }
 }
 
-const getLinks = async text => {
-  const data = await text
-  const dom = new JSDOM(data)
-  console.log(dom.window.document.querySelector('p').textContent)
-}
-
-// extractLinks(urls)
-getLinks(getText(nodeLink))
-// commnet
+test()
