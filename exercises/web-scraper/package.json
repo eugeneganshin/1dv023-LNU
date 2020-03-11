@@ -4,7 +4,9 @@
   "description": "A web-scraping app node.js",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "lint": "npx eslint . || exit 0",
+    "lint:fix": "npx eslint . --fix || exit 0"
   },
   "repository": {
     "type": "git",
@@ -27,5 +29,9 @@
   },
   "eslintConfig": {
     "extends": "@lnu"
+  },
+  "dependencies": {
+    "jsdom": "^16.2.1",
+    "node-fetch": "^2.6.0"
   }
 }
