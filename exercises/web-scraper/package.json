@@ -1,0 +1,19 @@
+{
+  "name": "web-scraper",
+  "version": "1.0.0",
+  "description": "A web-scraping app node.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dumihuvud/1dv023.git"
+  },
+  "author": "Eugene Ganshin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dumihuvud/1dv023/issues"
+  },
+  "homepage": "https://github.com/dumihuvud/1dv023#readme"
+}
