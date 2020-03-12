@@ -1,15 +1,24 @@
 const EventEmitter = require('events')
-const path = require('path')
+const fs = require('fs-extra')
 
 class TextCrawler extends EventEmitter {
-  constructor () {
+  constructor (word) {
     super()
+
+    this.word = word
+    this.files = []
   }
 
-  addFile (path) {
-    console.log(this.emit('something'))
+  // I need a fucntion that will take argument
+  // Push argument into array
+  addFile () {
+
   }
 
+  // I need a function that will read each file
+  // While it reads the file it should have a callback
+  // That will try and find the matching word
+  // If the word is found then emit event found
   find () {
 
   }
