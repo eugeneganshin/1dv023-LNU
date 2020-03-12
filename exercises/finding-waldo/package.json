@@ -1,0 +1,38 @@
+{
+  "name": "finding-waldo",
+  "version": "1.0.0",
+  "description": "assignment about event emitter\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[A",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "lint": "npx eslint . || exit 0",
+    "lint:fix": "npx eslint . --fix || exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dumihuvud/1dv023.git"
+  },
+  "author": "Eugene Ganshin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dumihuvud/1dv023/issues"
+  },
+  "homepage": "https://github.com/dumihuvud/1dv023#readme",
+  "devDependencies": {
+    "@lnu/eslint-config": "^1.0.6",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsdoc": "^22.0.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  },
+  "eslintConfig": {
+    "extends": "@lnu"
+  },
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "jsdom": "^16.2.1",
+    "node-fetch": "^2.6.0"
+  }
+}
