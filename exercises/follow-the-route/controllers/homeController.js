@@ -12,7 +12,7 @@ const indexPost = (req, res) => {
     dayTime: moment().format('dddd')
   }
 
-  throw new Error('Noooooo')
+  // throw new Error('Noooooo')
   res.render('home/index', { viewData })
 }
 
