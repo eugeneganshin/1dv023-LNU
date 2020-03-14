@@ -1,0 +1,10 @@
+<p>Hi i am an express app. What's your name?</p>
+
+<form action="/" method="POST">
+    <input type="text" name="name" placeholder="Enter your name here" />
+    <input type="submit" value="Send" />
+</form>
+
+{{#if viewData}}
+<p>Welcome {{viewData.name}} on this wonderful {{viewData.dayTime}}!</p>
+{{/if}}
