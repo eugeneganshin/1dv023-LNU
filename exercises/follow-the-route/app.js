@@ -15,8 +15,8 @@ app.set('views', path.join(__dirname, 'views'))
 
 // additional middleware
 app.use(logger('dev'))
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.urlencoded({ extended: false }))
+app.use(express.static(path.join(__dirname, 'public'))) // index.html
+// app.use(express.urlencoded({ extended: false }))
 
 // routes
 app.use('/', require('./routes/homeRouter'))
@@ -34,4 +34,4 @@ app.use((err, req, res, next) => {
 })
 
 // port
-app.listen(8000, () => console.log('Server is running on the port 8000'))
+app.listen(4000, () => console.log('Server is running on the port 8000'))
