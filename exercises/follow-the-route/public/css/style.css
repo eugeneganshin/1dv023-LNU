@@ -14,26 +14,20 @@ body {
     display: grid;
     grid-template-areas: 
       'header header header header header header' 
-      'left middle middle middle middle right' 
+      'left left left right right right' 
       'footer footer footer footer footer footer';
     min-height: 100vh
 }
 
 .left,
-.middle,
 .right {
   padding: 10px;
-  height: 300px;
+  height: auto;
 }
 
 .left {
     grid-area: left;
     background-color: cadetblue;
-}
-
-.middle {
-    grid-area: middle;
-    background-color: darkgray;
 }
 
 .right {
@@ -53,7 +47,6 @@ body {
       grid-template-areas: 
         'header header header header header header' 
         'left left left left left left' 
-        'middle middle middle middle middle middle' 
         'right right right right right right' 
         'footer footer footer footer footer footer';
   }
