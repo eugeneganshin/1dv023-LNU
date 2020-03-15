@@ -35,6 +35,7 @@ body {
     grid-area: middle;
     background-color: darkgray;
 }
+
 .right {
     grid-area: right;
     background-color: lightgreen;
@@ -56,4 +57,48 @@ body {
         'right right right right right right' 
         'footer footer footer footer footer footer';
   }
+  .grid-container-products  {
+    grid-template-areas: 
+      'header header header header header header' 
+      'left left left left left left' 
+      'middle middle middle middle middle middle' 
+      'right right right right right right' 
+      'footer footer footer footer footer footer';
+}
+}
+
+.grid-container-products {
+    display: grid;
+    grid-template-areas: 
+      'header header header header header header' 
+      'middle middle middle middle middle middle' 
+      'footer footer footer footer footer footer';
+    min-height: 100vh
+}
+
+.middle-products {
+    grid-area: middle;
+    background-color: darkgray;
+    padding: 10px;
+    height: auto;
+
+}
+
+#products-h1{
+}
+
+#products-table{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }

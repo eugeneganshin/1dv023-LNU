@@ -1,19 +1,38 @@
 'use strict'
 
-const moment = require('moment')
+const productsController = {}
+const products = [{ id: 1, name: 'Phone' }]
 
-const index = (req, res) => {
-  res.render('home/index')
+productsController.index = (req, res) => {
+  const viewData = { products }
+  res.render('products/index', { viewData })
 }
 
-const indexPost = (req, res) => {
-  const viewData = {
-    name: req.body.name,
-    dayTime: moment().format('dddd')
+productsController.new = async (req, res) => {
+  res.render('products/new')
+}
+
+productsController.create = async (req, res) => {
+  products.push({
+    id: products.length + 1,
+    name: req.body.name
+  })
+
+  res.redirect('.')
+}
+productsController.show = async (req, res, next) => {
+  const product = products
+    .filter(product => product.id === Number(req.params.id))
+    .shift()
+  if (!product) {
+    const error = new Error('Not found')
+    error.statusCode = 404
+
+    return next(error)
   }
 
-  // throw new Error('Noooooo')
-  res.render('home/index', { viewData })
+  const viewData = { product }
+  res.render('products/show', { viewData })
 }
 
-module.exports = { index, indexPost }
+module.exports = productsController

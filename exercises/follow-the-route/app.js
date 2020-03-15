@@ -1,5 +1,6 @@
 'use strict'
 
+const createError = require('http-errors')
 const express = require('express')
 const hbs = require('express-hbs')
 const path = require('path')
@@ -8,18 +9,22 @@ const app = express()
 
 // view engine setup
 app.engine('hbs', hbs.express4({
-  defaultLayout: path.join(__dirname, 'views', 'layouts', 'default')
+  defaultLayout: path.join(__dirname, 'views', 'layouts', 'default'),
+  partialsDir: path.join(__dirname, 'views', 'partials')
 }))
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'views'))
 
 // additional middleware
 app.use(logger('dev'))
-app.use(express.static(path.join(__dirname, 'public'))) // index.html
-// app.use(express.urlencoded({ extended: false }))
+
+// static
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.urlencoded({ extended: true }))
 
 // routes
-app.use('/', require('./routes/homeRouter'))
+app.use('/products', require('./routes/homeRouter'))
+app.use('*', (req, res, next) => next(createError(404)))
 
 // catch 404
 app.use((req, res, next) => {

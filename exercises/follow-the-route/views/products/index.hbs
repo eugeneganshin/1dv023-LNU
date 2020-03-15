@@ -1,0 +1,19 @@
+<div class="middle-products">
+    <h1 id="products-h1">Products</h1>
+    <table id="products-table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        {{#if viewData.products.length}}
+         {{#each viewData.products}}
+        <tr>
+            <th>{{this.id}}</th>
+            <th><a href="/products/{{this.id}}">{{this.name}}</a></th>
+        </tr>
+          {{/each}}
+          {{else}}
+          <p>No products</p>
+          {{/if}}
+    </table>
+</div> 
