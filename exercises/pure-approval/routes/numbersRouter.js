@@ -9,6 +9,6 @@ router.get('/', numbersController.index)
 router.get('/new', numbersController.new)
 router.post('/create', numbersController.create)
 
-router.get('/:value', numbersController.show)
+router.get('/:val', numbersController.show)
 
 module.exports = router
