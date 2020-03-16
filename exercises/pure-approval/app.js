@@ -13,6 +13,7 @@ const app = express()
 
 /**
  * Connect to mongoDB database.
+ * Mongoose.connect returns a promise.
  */
 mongoose.connect().catch(error => {
   console.error(error)

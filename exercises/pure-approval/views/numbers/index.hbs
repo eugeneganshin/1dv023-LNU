@@ -1,1 +1,19 @@
-<p>Hey</p>
+<div class="middle-numbers">
+    <h1 id="numbers-h1">Products</h1>
+    <table id="numbers-table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        {{#if viewData.numbers.length}}
+         {{#each viewData.numbers}}
+        <tr>
+            <th>{{this.date}}</th>
+            <th><a href="/numbers/{{this.date}}">{{this.value}}</a></th>
+        </tr>
+          {{/each}}
+          {{else}}
+          <p>No numbers to show</p>
+          {{/if}}
+    </table>
+</div> 
