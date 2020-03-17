@@ -24,6 +24,8 @@ productsController.show = async (req, res, next) => {
   const product = products
     .filter(product => product.id === Number(req.params.id))
     .shift()
+  console.log(req.param + ' req.param')
+  console.log(Number(req.params.id) + ' req.param.id')
   if (!product) {
     const error = new Error('Not found')
     error.statusCode = 404
