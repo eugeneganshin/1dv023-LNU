@@ -3,7 +3,7 @@
 
 <form method="post" action="/numbers/create">
   <div class="form-group">
-    <input type="text" id="inputName" name="value" placeholder="Enter new number" required="required" autofocus="autofocus" />
+    <input type="text" id="inputName" name="value" value="{{viewData.value}}" placeholder="Enter new number" required="required" autofocus="autofocus" />
   </div>
 
   <button type="submit">Create new number</button>

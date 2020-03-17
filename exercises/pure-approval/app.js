@@ -1,5 +1,5 @@
 'use strict'
-
+const createError = require('http-errors')
 const express = require('express')
 const favicon = require('serve-favicon')
 const hbs = require('express-hbs')
@@ -41,5 +41,30 @@ app.use(express.static(path.join(__dirname, 'public')))
  * Routes.
  */
 app.use('/numbers', require('./routes/numbersRouter'))
+app.use('*', (req, res, next) => next(createError(404)))
+
+app.use((err, req, res, next) => {
+  // 404 Not Found.
+  if (err.statusCode === 404) {
+    return res
+      .status(404)
+      .sendFile(path.join(__dirname, 'views', 'errors', '404.html'))
+  }
+
+  // 500 Internal Server Error (in production, all other errors send this response).
+  if (req.app.get('env') !== 'development') {
+    return res
+      .status(500)
+      .sendFile(path.join(__dirname, 'views', 'errors', '500.html'))
+  }
+
+  // Development only!
+  // Set locals, only providing error in development.
+
+  // Render the error page.
+  res
+    .status(err.status || 500)
+    .render('errors/error', { error: err })
+})
 
 app.listen(4000, () => console.log('Server is running'))
