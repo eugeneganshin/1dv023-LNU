@@ -1,19 +1,23 @@
-{{!-- <div class="middle-numbers">
+<div class="middle-numbers">
     <h1 id="numbers-h1">Numbers</h1>
     <table id="numbers-table">
         <tr>
             <th>ID</th>
             <th>Name</th>
         </tr>
-        {{#if viewData.numbers.length}}
-         {{#each viewData.numbers}}
+        {{#if viewData.number.length}}
+        {{#if}}
+         {{#each viewData.number}}
         <tr>
-            <th>{{this.date}}</th>
+            <th>{{this.createdAt}}</th>
             <th><a href="/numbers/{{this.value}}">{{this.value}}</a></th>
         </tr>
           {{/each}}
           {{else}}
           <p>No numbers to show</p>
           {{/if}}
+            {{!-- {{#if flash}}
+            <p><span>{{flash.type}}</span> <span>{{flash.text}}</span></p>
+            {{/if}} --}}
     </table>
-</div>  --}}
+</div>
