@@ -1,4 +1,5 @@
 'use strict'
+require('dotenv').config()
 const createError = require('http-errors')
 const express = require('express')
 const favicon = require('serve-favicon')
@@ -52,10 +53,10 @@ const sessionOptions = {
     sameSite: 'lax'
   }
 }
-// On production only
+// Will not work if NODE_ENV == undefined
 if (app.get('env') === 'production') {
   app.set('trust proxy', 1)
-  sessionOptions.cookie.sucure = true
+  sessionOptions.cookie.secure = true
 }
 app.use(session(sessionOptions))
 // Middleware for flash messages

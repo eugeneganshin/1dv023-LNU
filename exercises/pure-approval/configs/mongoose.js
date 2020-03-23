@@ -2,8 +2,6 @@
 
 const mongoose = require('mongoose')
 
-const CONNECTION_STRING = 'mongodb+srv://esganshin:N5Y7q4Jie1iEFzwb@1dv023-biqfr.mongodb.net/justodoit?retryWrites=true&w=majority'
-
 module.exports.connect = async () => {
   mongoose.connection.on('connected', () => console.log('Conneciton is open'))
   mongoose.connection.on('error', err => console.error(`Connection error ${err}`))
@@ -18,7 +16,7 @@ module.exports.connect = async () => {
   })
 
   // Returns a promise.
-  return mongoose.connect(CONNECTION_STRING, {
+  return mongoose.connect(process.env.DB_CONNECTION_STRING, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
