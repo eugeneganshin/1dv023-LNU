@@ -41,6 +41,24 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 /**
  * Session storage and flash.
  */
+const sessionOptions = {
+  name: 'my test session',
+  secret: 'test session',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24 * 30,
+    sameSite: 'lax'
+  }
+}
+// On production only
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1)
+  sessionOptions.cookie.sucure = true
+}
+app.use(session(sessionOptions))
+// Middleware for flash messages
 app.use((req, res, next) => {
   if (req.session.flash) {
     res.locals.flash = req.session.flash
@@ -55,6 +73,7 @@ app.use((req, res, next) => {
  */
 app.use('/', require('./routes/numbersRouter'))
 app.use('*', (req, res, next) => next(createError(404)))
+
 /**
  * Error handling.
  */

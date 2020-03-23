@@ -38,7 +38,7 @@ pureNumberController.create = async (req, res) => {
     })
     await pureNumber.save()
 
-    // req.session.flash = { type: 'Success', text: 'The number was succesfully saved' }
+    req.session.flash = { type: 'Success', text: 'The number was succesfully saved' }
     res.redirect('.')
   } catch (error) {
     console.log(error)
