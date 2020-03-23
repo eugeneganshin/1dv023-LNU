@@ -5,8 +5,8 @@ const pureNumber = new Schema({
   value: {
     type: Number,
     required: '`{PATH}` is required!',
-    max: [42, '`{PATH}` ({VALUE}) exceeds the limit ({MAX}).'],
-    min: [1, '`{PATH}` ({VALUE}) is beneath the limit ({MIN}).']
+    max: [42, '{VALUE} exceeds the limit of {MAX}.'],
+    min: [1, '{VALUE} is beneath the limit of {MIN}.']
   }
 }, {
   timestamps: true,

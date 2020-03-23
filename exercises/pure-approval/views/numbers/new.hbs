@@ -1,11 +1,12 @@
 <div class="middle-products">
-<h1>New product</h1>
+<h1>New number</h1>
 
-<form method="post" action="/numbers/create">
+<form method="post" action="/create">
+  {{>validation}}
   <div class="form-group">
     <input type="text" id="inputName" name="value" value="{{viewData.value}}" placeholder="Enter new number" required="required" autofocus="autofocus" />
   </div>
 
-  <button type="submit">Create new number</button>
+  <button type="submit">Create</button>
 </form>
 </div>

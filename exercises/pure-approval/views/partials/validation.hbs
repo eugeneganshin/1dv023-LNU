@@ -1,0 +1,9 @@
+{{#if validationErrors}}
+    <div class="validation">
+        <ul>
+            {{#each validationErrors}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+{{/if}}

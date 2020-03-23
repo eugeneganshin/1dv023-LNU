@@ -4,7 +4,7 @@
   "description": "Training to create routes",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node server.js",
     "devstart": "nodemon --inspect ./app.js",
     "lint": "standard | snazzy || exit 0",
     "lint:fix": "npx eslint . --fix || exit 0"

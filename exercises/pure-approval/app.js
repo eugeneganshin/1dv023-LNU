@@ -36,35 +36,44 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(logger('dev'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+
+/**
+ * Session storage and flash.
+ */
+app.use((req, res, next) => {
+  if (req.session.flash) {
+    res.locals.flash = req.session.flash
+    delete req.session.flash
+  }
+
+  next()
+})
 
 /**
  * Routes.
  */
-app.use('/numbers', require('./routes/numbersRouter'))
+app.use('/', require('./routes/numbersRouter'))
 app.use('*', (req, res, next) => next(createError(404)))
-
+/**
+ * Error handling.
+ */
 app.use((err, req, res, next) => {
-  // 404 Not Found.
   if (err.statusCode === 404) {
     return res
       .status(404)
       .sendFile(path.join(__dirname, 'views', 'errors', '404.html'))
   }
 
-  // 500 Internal Server Error (in production, all other errors send this response).
   if (req.app.get('env') !== 'development') {
     return res
       .status(500)
       .sendFile(path.join(__dirname, 'views', 'errors', '500.html'))
   }
 
-  // Development only!
-  // Set locals, only providing error in development.
-
-  // Render the error page.
   res
     .status(err.status || 500)
     .render('errors/error', { error: err })
 })
 
-app.listen(4000, () => console.log('Server is running'))
+app.listen(4000, () => console.log('Server is running at http://localhost:4000'))

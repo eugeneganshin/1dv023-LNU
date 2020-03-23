@@ -2,22 +2,21 @@
     <h1 id="numbers-h1">Numbers</h1>
     <table id="numbers-table">
         <tr>
-            <th>ID</th>
-            <th>Name</th>
+            <th>Created</th>
+            <th>Value</th>
         </tr>
-        {{#if viewData.number.length}}
-        {{#if}}
-         {{#each viewData.number}}
+        {{#if viewData.pureNumbers.length}}
+         {{#each viewData.pureNumbers}}
         <tr>
             <th>{{this.createdAt}}</th>
-            <th><a href="/numbers/{{this.value}}">{{this.value}}</a></th>
+            <th>{{this.value}}</th>
         </tr>
-          {{/each}}
-          {{else}}
-          <p>No numbers to show</p>
-          {{/if}}
-            {{!-- {{#if flash}}
-            <p><span>{{flash.type}}</span> <span>{{flash.text}}</span></p>
-            {{/if}} --}}
+        {{/each}}
+        {{else}}
+        <p>No numbers to show</p>
+        {{/if}}
+        {{#if flash}}
+        <p><span>{{flash.type}}</span> <span>{{flash.text}}</span></p>
+        {{/if}}
     </table>
 </div>

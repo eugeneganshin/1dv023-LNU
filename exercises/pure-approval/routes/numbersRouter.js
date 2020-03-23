@@ -2,13 +2,10 @@
 const express = require('express')
 const router = express.Router()
 
-const numbersController = require('../controllers/numbersController')
+const controller = require('../controllers/numbersController')
 
-router.get('/', numbersController.index)
-
-router.get('/new', numbersController.new)
-router.post('/create', numbersController.create)
-
-// router.get('/:val', numbersController.show)
+router.get('/', controller.index)
+router.get('/new', controller.new)
+router.post('/create', controller.create)
 
 module.exports = router

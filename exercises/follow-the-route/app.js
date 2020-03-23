@@ -40,3 +40,5 @@ app.use((err, req, res, next) => {
 
 // port
 app.listen(5000, () => console.log('Server is running on the port 8000'))
+
+const some = 'lol'
