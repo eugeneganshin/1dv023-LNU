@@ -1,7 +1,11 @@
 const path = require('path')
 const fs = require('fs-extra')
-const { getText } = require('./scraper/scrape')
+const { getInitialLinks } = require('./scraper/scrape')
 
 const url = 'http://vhost3.lnu.se:20080/weekend'
+const url2 = 'http://vhost3.lnu.se:20080/calendar'
 
-getText(url)
+const username = 'zeke'
+const password = 'coys'
+
+getInitialLinks(url)
