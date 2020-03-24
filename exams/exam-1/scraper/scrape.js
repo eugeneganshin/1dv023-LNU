@@ -15,6 +15,14 @@ const getInitialLinks = async url => {
   }
 }
 
+const parseCalendar = async arr => {
+  try {
+
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 /**
  * ToDos: find href links in parser and follow them to parse further.
  */
