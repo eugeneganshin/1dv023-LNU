@@ -24,10 +24,13 @@
     "express": "^4.17.1",
     "express-hbs": "^2.3.1",
     "express-session": "^1.17.0",
+    "fs-extra": "^9.0.0",
     "http-errors": "^1.7.3",
+    "jsdom": "^16.2.1",
     "moment": "^2.24.0",
     "mongoose": "^5.9.4",
     "morgan": "^1.9.1",
+    "node-fetch": "^2.6.0",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
