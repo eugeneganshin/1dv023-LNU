@@ -8,4 +8,9 @@ const url2 = 'http://vhost3.lnu.se:20080/calendar'
 const username = 'zeke'
 const password = 'coys'
 
-getInitialLinks(url)
+// getInitialLinks(url)
+
+// paul: {
+//   friday: 'ok',
+//   saturday: 'ok',
+//   sunday: '--'
