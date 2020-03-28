@@ -86,42 +86,16 @@ const main = async () => {
     const [paul, peter, mary] = await parseCalendar(calendar)
     const results = await testPromise([paul, peter, mary])
     await fs.writeJson(pathToFile, results)
-
-    let friday = 0
-    let saturday = 0
-    let sunday = 0
-    Object.entries(results).forEach(([key, val]) => {
-      switch (val.Friday) {
-        case 'OK':
-          friday++
-          break
-        case 'ok':
-          friday++
-      }
-      switch (val.Saturday) {
-        case 'OK':
-          saturday++
-          break
-        case 'ok':
-          saturday++
-      }
-      switch (val.Sunday) {
-        case 'OK':
-          sunday++
-          break
-        case 'ok':
-          sunday++
-      }
-    })
-    console.log(friday + ' friday')
-    console.log(saturday + ' saturday')
-    console.log(sunday + ' sunday')
+    console.log(
+      Object.values(results).every(o => o.Friday === 'ok')
+    )
   } catch (error) {
     console.error(error)
   }
 }
 main()
 
+// if days are duplicates => add property yes!
 // need to check the available day and return the name of the day
 
 // read json file and check the dates => return day (friday)
@@ -154,4 +128,33 @@ main()
       }
     })
     console.log(fridayCount)
+ */
+
+/**
+ * Let friday = 0
+    let saturday = 0
+    let sunday = 0
+    Object.entries(results).forEach(([key, val]) => {
+      switch (val.Friday) {
+        case 'OK':
+          friday++
+          break
+        case 'ok':
+          friday++
+      }
+      switch (val.Saturday) {
+        case 'OK':
+          saturday++
+          break
+        case 'ok':
+          saturday++
+      }
+      switch (val.Sunday) {
+        case 'OK':
+          sunday++
+          break
+        case 'ok':
+          sunday++
+      }
+    }).
  */
