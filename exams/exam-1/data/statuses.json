@@ -1,0 +1,6 @@
+{
+  "paul":{"Friday":"ok","Saturday":"OK","Sunday":"--"},
+  "peter":{"Friday":"ok","Saturday":"--","Sunday":"ok"},
+  "mary":{"Friday":"ok","Saturday":"OK","Sunday":"--"}, 
+  "available": {"friday": 3, "saturday": 2, "sunday": 1}
+}
