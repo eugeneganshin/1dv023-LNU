@@ -5,12 +5,6 @@ const fs = require('fs-extra')
 
 const url = 'http://vhost3.lnu.se:20080/weekend'
 
-/**
- * Helper funciton to get HTML content.
- *
- * @param {string} url Gets route to webpage.
- * @returns {string} Returns HTML game as plain/text.
- */
 const getHTML = async url => {
   try {
     const res = await fetch(url)
@@ -21,10 +15,11 @@ const getHTML = async url => {
   }
 }
 
-const getInitialLinks = async data => {
+const getInitialLinks = async url => {
   try {
-    const page = await data
-    const dom = new JSDOM(page)
+    const res = await fetch(url)
+    const data = await res.text()
+    const dom = new JSDOM(data)
     const arr = Array.from(dom.window.document.querySelectorAll('a[href^="http://"],a[href^="https://"]'),
       element => element.href)
     return arr.flat()
@@ -34,23 +29,14 @@ const getInitialLinks = async data => {
 }
 
 // Gets the array of links with names
-const parseCalendar = async url => {
-  const res = await fetch(url)
+const parseCalendar = async urlCalendar => {
+  const res = await fetch(urlCalendar)
   const data = await res.text()
   const dom = new JSDOM(data)
   const names = Array.from(dom.window.document.querySelectorAll('a'),
     element => element.href)
-  const namesLinks = names.map(name => url + name)
+  const namesLinks = names.map(name => urlCalendar + name)
   return namesLinks
-}
-
-const parseCinema = async (url, day) => {
-  const res = await fetch(url)
-  const data = await res.text()
-  const dom = new JSDOM(data)
-  const movies = Array.from(dom.window.document.querySelector('#movie'), element => element.value)
-  const movieValues = movies.splice(1, 3)
-  return movieValues
 }
 
 const testPromise = async names => {
@@ -71,30 +57,23 @@ const testPromise = async names => {
   return charSchedule
 }
 
-const availableDay = async results => {
-  if (Object.values(results).every(obj => obj.Friday === 'ok')) {
-    return '05'
-  }
-  if (Object.values(results).every(obj => obj.Satuday === 'OK')) {
-    return '06'
-  }
-  if (Object.values(results).every(obj => obj.Sunday === 'ok')) {
-    return '07'
-  }
-}
-
 const pathToFile = path.resolve('data', 'statuses.json')
 
 const main = async () => {
   try {
-    const data = getHTML(url)
-    const [calendar, cinema, dinner] = await getInitialLinks(data)
+    const [calendar, cinema, dinner] = await getInitialLinks(url)
     const [paul, peter, mary] = await parseCalendar(calendar)
-    const [deuces, seats, races] = await parseCinema(cinema)
     const results = await testPromise([paul, peter, mary])
-    const day = await availableDay(results)
-    // console.log(day)
-    // await fs.writeJson(pathToFile, results)
+    await fs.writeJson(pathToFile, results)
+    if (Object.values(results).every(obj => obj.Friday === 'ok')) {
+      // do something
+    }
+    if (Object.values(results).every(obj => obj.Satuday === 'OK')) {
+      // do something
+    }
+    if (Object.values(results).every(obj => obj.Sunday === 'ok')) {
+      // do something
+    }
   } catch (error) {
     console.error(error)
   }

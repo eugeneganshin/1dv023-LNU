@@ -27,4 +27,5 @@ const getTraffic = async url => {
   }
 }
 
+// getTraffic(traffic)
 getHTML(url)
