@@ -2,7 +2,8 @@ const fetch = require('node-fetch')
 const { JSDOM } = require('jsdom')
 const path = require('path')
 const fs = require('fs-extra')
-
+const qs = require('querystring')
+const unirest = require('unirest')
 const url = 'http://vhost3.lnu.se:20080/weekend'
 
 /**
@@ -15,6 +16,16 @@ const getHTML = async url => {
   try {
     const res = await fetch(url)
     const data = await res.text()
+    return data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const getJSON = async url => {
+  try {
+    const res = await fetch(url)
+    const data = await res.json()
     return data
   } catch (error) {
     console.error(error)
@@ -53,6 +64,19 @@ const parseCinema = async (url, day) => {
   return movieValues
 }
 
+const parseMovies = async movieLinks => {
+  try {
+    const promises = movieLinks.map(async link => getJSON(link))
+    const text = await Promise.all(promises)
+    const filteredMovies = text.flat().filter((movie) => {
+      return movie.status === 1
+    })
+    return filteredMovies
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 const testPromise = async names => {
   const statuses = []
   const name = names.map(name => name.match(/(\b(?:(?!html|http|vhost3|lnu|se|20080|calendar)\w)+\b)/g, '')).flat()
@@ -83,7 +107,20 @@ const availableDay = async results => {
   }
 }
 
+const generateLink = async (deuces, seats, races, day) => {
+  const deucesLink = `http://vhost3.lnu.se:20080/cinema/check?day=${day}&movie=${deuces}`
+  const seatsLink = `http://vhost3.lnu.se:20080/cinema/check?day=${day}&movie=${seats}`
+  const racesLink = `http://vhost3.lnu.se:20080/cinema/check?day=${day}&movie=${races}`
+  return [deucesLink, seatsLink, racesLink]
+}
+
 const pathToFile = path.resolve('data', 'statuses.json')
+
+// const options = {
+//   headers: {
+//     cookie: 'accessToken='
+//   }
+// }
 
 const main = async () => {
   try {
@@ -93,7 +130,10 @@ const main = async () => {
     const [deuces, seats, races] = await parseCinema(cinema)
     const results = await testPromise([paul, peter, mary])
     const day = await availableDay(results)
-    // console.log(day)
+    const movieLinks = await generateLink(deuces, seats, races, day)
+    const availableMovies = parseMovies(movieLinks)
+    const login = await getHTML('http://vhost3.lnu.se:20080/dinner/login/booking')
+    console.log(login)
     // await fs.writeJson(pathToFile, results)
   } catch (error) {
     console.error(error)
@@ -101,9 +141,16 @@ const main = async () => {
 }
 main()
 
-// if days are duplicates => add property yes!
-// need to check the available day and return the name of the day
+const req = unirest('POST', 'http://vhost3.lnu.se:20080/dinner/login')
+  .headers({
+    'Content-Type': 'application/x-www-form-urlencoded'
+  })
+  .send('username=zeke')
+  .send('password=coys')
+  // .followRedirect(true)
+  .end(function (res) {
+    if (res.error) throw new Error(res.error)
+    console.log(res.cookies)
+  })
 
-// read json file and check the dates => return day (friday)
-// read html page of calendar for friday and pull all the movies time
-// counter for each day. if counter === 3 => ok
+// console.log(getHTML('http://vhost3.lnu.se:20080/dinner/login/booking'))
