@@ -149,7 +149,25 @@ const url = 'http://vhost3.lnu.se:20080/weekend'
 
 const logic = (moviesStatus, cafeSlots) => {
   console.log(moviesStatus)
-  console.log(cafeSlots)
+  // console.log(cafeSlots)
+  const splitted = cafeSlots.map(val => val.split(/(\d+)/))
+  const splitNum = str => {
+    const middle = Math.ceil(str.length / 2)
+    const s1 = str.slice(0, middle)
+    const s2 = str.slice(middle)
+    return s1 + '.' + s2
+  }
+  const a = splitted.map(val => splitNum(val[1]))
+  console.log(a)
+  const arr = []
+  for (let i = 0; i < moviesStatus.length; i++) {
+    for (let j = 0; j < a.length; j++) {
+      arr.push((parseInt(moviesStatus[i].time) - parseFloat(a[j])).toFixed(2) + ' ' + moviesStatus[i].movie)
+      console.log((parseInt(moviesStatus[i].time) - parseFloat(a[j])).toFixed(2) + ' ' + moviesStatus[i].movie)
+    }
+  }
+  console.log(arr)
+  // console.log(splitted)
 }
 
 const main = async (url) => {
