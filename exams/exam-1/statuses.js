@@ -1,10 +1,11 @@
 const fetch = require('node-fetch')
+const got = require('got')
 const { JSDOM } = require('jsdom')
 const path = require('path')
 const fs = require('fs-extra')
-const qs = require('querystring')
-const unirest = require('unirest')
 const url = 'http://vhost3.lnu.se:20080/weekend'
+
+const { CookieJar } = require('tough-cookie')
 
 /**
  * Helper funciton to get HTML content.
@@ -106,6 +107,7 @@ const availableDay = async results => {
     return '07'
   }
 }
+const pathToFile = path.resolve('data', 'statuses.json')
 
 const generateLink = async (deuces, seats, races, day) => {
   const deucesLink = `http://vhost3.lnu.se:20080/cinema/check?day=${day}&movie=${deuces}`
@@ -114,43 +116,45 @@ const generateLink = async (deuces, seats, races, day) => {
   return [deucesLink, seatsLink, racesLink]
 }
 
-const pathToFile = path.resolve('data', 'statuses.json')
-
-// const options = {
-//   headers: {
-//     cookie: 'accessToken='
-//   }
-// }
-
 const main = async () => {
   try {
-    const data = getHTML(url)
-    const [calendar, cinema, dinner] = await getInitialLinks(data)
-    const [paul, peter, mary] = await parseCalendar(calendar)
-    const [deuces, seats, races] = await parseCinema(cinema)
-    const results = await testPromise([paul, peter, mary])
-    const day = await availableDay(results)
-    const movieLinks = await generateLink(deuces, seats, races, day)
-    const availableMovies = parseMovies(movieLinks)
-    const login = await getHTML('http://vhost3.lnu.se:20080/dinner/login/booking')
-    console.log(login)
+    // const data = getHTML(url)
+    // const [calendar, cinema, dinner] = await getInitialLinks(data)
+    // const [paul, peter, mary] = await parseCalendar(calendar)
+    // const [deuces, seats, races] = await parseCinema(cinema)
+    // const results = await testPromise([paul, peter, mary])
+    // const day = await availableDay(results)
+    // const movieLinks = await generateLink(deuces, seats, races, day)
+    // const availableMovies = parseMovies(movieLinks)
+
+    // const login = await getHTML('http://vhost3.lnu.se:20080/dinner/login/booking')
     // await fs.writeJson(pathToFile, results)
+
   } catch (error) {
     console.error(error)
   }
 }
 main()
 
-const req = unirest('POST', 'http://vhost3.lnu.se:20080/dinner/login')
-  .headers({
-    'Content-Type': 'application/x-www-form-urlencoded'
-  })
-  .send('username=zeke')
-  .send('password=coys')
-  // .followRedirect(true)
-  .end(function (res) {
-    if (res.error) throw new Error(res.error)
-    console.log(res.cookies)
-  })
+const params = new URLSearchParams()
+params.append('username', 'zeke')
+params.append('password', 'coys')
+params.append('submit', 'login')
 
-// console.log(getHTML('http://vhost3.lnu.se:20080/dinner/login/booking'))
+const testGot = async () => {
+  const cookieJar = new CookieJar()
+  const resPost = await got('http://vhost3.lnu.se:20080/dinner/login', {
+    form: params,
+    method: 'POST',
+    followRedirect: false,
+    cookieJar
+  })
+  const resGet = await got('http://vhost3.lnu.se:20080/dinner/login/booking', {
+    method: 'GET',
+    cookieJar
+  })
+  // console.log(res.redirectUrls)
+  console.log(resGet)
+}
+
+testGot()
