@@ -3,7 +3,6 @@ const got = require('got')
 const { JSDOM } = require('jsdom')
 const path = require('path')
 const fs = require('fs-extra')
-const url = 'http://vhost3.lnu.se:20080/weekend'
 
 const { CookieJar } = require('tough-cookie')
 
@@ -107,7 +106,6 @@ const availableDay = async results => {
     return '07'
   }
 }
-const pathToFile = path.resolve('data', 'statuses.json')
 
 const generateLink = async (deuces, seats, races, day) => {
   const deucesLink = `http://vhost3.lnu.se:20080/cinema/check?day=${day}&movie=${deuces}`
@@ -115,26 +113,6 @@ const generateLink = async (deuces, seats, races, day) => {
   const racesLink = `http://vhost3.lnu.se:20080/cinema/check?day=${day}&movie=${races}`
   return [deucesLink, seatsLink, racesLink]
 }
-
-const main = async () => {
-  try {
-    // const data = getHTML(url)
-    // const [calendar, cinema, dinner] = await getInitialLinks(data)
-    // const [paul, peter, mary] = await parseCalendar(calendar)
-    // const [deuces, seats, races] = await parseCinema(cinema)
-    // const results = await testPromise([paul, peter, mary])
-    // const day = await availableDay(results)
-    // const movieLinks = await generateLink(deuces, seats, races, day)
-    // const availableMovies = parseMovies(movieLinks)
-
-    // const login = await getHTML('http://vhost3.lnu.se:20080/dinner/login/booking')
-    // await fs.writeJson(pathToFile, results)
-
-  } catch (error) {
-    console.error(error)
-  }
-}
-main()
 
 const params = new URLSearchParams()
 params.append('username', 'zeke')
@@ -153,8 +131,49 @@ const testGot = async () => {
     method: 'GET',
     cookieJar
   })
-  // console.log(res.redirectUrls)
-  console.log(resGet)
+  return resGet.body
 }
 
-testGot()
+const parseCafe = async (data) => {
+  const dom = new JSDOM(data)
+  const availableTime = Array.from(dom.window.document.querySelectorAll('input'), element => element.value)
+  const len = availableTime.flat().length
+  const findAllFridays = val => /(fri)/.test(val)
+
+  return availableTime.flat().splice(0, len - 1).filter(findAllFridays)
+}
+
+const pathToFile = path.resolve('data', 'statuses.json')
+
+const url = 'http://vhost3.lnu.se:20080/weekend'
+
+const logic = (moviesStatus, cafeSlots) => {
+  console.log(moviesStatus)
+  console.log(cafeSlots)
+}
+
+const main = async (url) => {
+  try {
+    const startPage = getHTML(url)
+    const [calendar, cinema, dinner] = await getInitialLinks(startPage)
+
+    const [paul, peter, mary] = await parseCalendar(calendar)
+    const [deuces, seats, races] = await parseCinema(cinema)
+    const results = await testPromise([paul, peter, mary])
+    const day = await availableDay(results) // gets friday
+
+    const movieLinks = await generateLink(deuces, seats, races, day)
+    const availableMovies = await parseMovies(movieLinks) // gets movies in friday
+    // await fs.writeJson(pathToFile, results)
+    const cafePage = await testGot()
+    const cafeSlots = await parseCafe(cafePage)
+    await logic(availableMovies, cafeSlots)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+main(url)
+
+// movie 02 at 16:00 and movie 03 at 16:00
+// table empty at 18:20
