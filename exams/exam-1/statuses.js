@@ -149,25 +149,39 @@ const url = 'http://vhost3.lnu.se:20080/weekend'
 
 const logic = (moviesStatus, cafeSlots) => {
   console.log(moviesStatus)
-  // console.log(cafeSlots)
-  const splitted = cafeSlots.map(val => val.split(/(\d+)/))
+  console.log(cafeSlots)
+  const movieslotSplit = cafeSlots.map(val => val.split(/(\d+)/))
   const splitNum = str => {
     const middle = Math.ceil(str.length / 2)
     const s1 = str.slice(0, middle)
     const s2 = str.slice(middle)
     return s1 + '.' + s2
   }
-  const a = splitted.map(val => splitNum(val[1]))
-  console.log(a)
-  const arr = []
+  const a = movieslotSplit.map(val => splitNum(val[1]))
+  const movieSlot = []
   for (let i = 0; i < moviesStatus.length; i++) {
     for (let j = 0; j < a.length; j++) {
-      arr.push((parseInt(moviesStatus[i].time) - parseFloat(a[j])).toFixed(2) + ' ' + moviesStatus[i].movie)
-      console.log((parseInt(moviesStatus[i].time) - parseFloat(a[j])).toFixed(2) + ' ' + moviesStatus[i].movie)
+      movieSlot.push((parseFloat(a[j]).toFixed(2) - parseInt(moviesStatus[i].time)).toFixed(2) + ' ' + moviesStatus[i].movie + ' ' + moviesStatus[i].time + ' ' + movieslotSplit[j])
     }
   }
-  console.log(arr)
-  // console.log(splitted)
+  console.log(movieSlot)
+  const IfMoreThanTwoHours = el => {
+    return el[0] >= 2
+  }
+  const movieName = el => {
+    if (el[1] === '01') {
+      return ' The Flying Deuces' + el[2]
+    } else if (el[1] === '02') {
+      return ' Keep Your Seats, Please' + el[2]
+    } else if (el[1] === '03') {
+      return ' A day at the races' + el[2]
+    } else {
+      return 'No such movie'
+    }
+  }
+  const aqq = movieSlot.filter(IfMoreThanTwoHours).map(val => val.split(' '))
+  console.log(aqq.map(movieName))
+  console.log(aqq)
 }
 
 const main = async (url) => {
