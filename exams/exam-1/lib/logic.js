@@ -1,8 +1,8 @@
 const logic = (moviesStatus, cafeSlots) => {
+  const movieslotSplit = cafeSlots.map(val => val.split(/(\d+)/))
+
   // console.log(moviesStatus)
   // console.log(cafeSlots)
-  const movieslotSplit = cafeSlots.map(val => val.split(/(\d+)/))
-  // console.log(movieslotSplit)
 
   const splitNum = str => {
     const middle = Math.ceil(str.length / 2)
@@ -24,14 +24,14 @@ const logic = (moviesStatus, cafeSlots) => {
   }
   const a = movieslotSplit.map(val => whatDay(val[0]) + ' ' + splitNum(val[1]))
   const b = a.map(e => e.split(' '))
-  console.log(b)
+
   const movieSlot = []
   for (let i = 0; i < moviesStatus.length; i++) {
     for (let j = 0; j < a.length; j++) {
       movieSlot.push((parseFloat(b[j][1]).toFixed(2) - parseInt(moviesStatus[i].time)).toFixed(2) + ' ' + moviesStatus[i].movie + ' ' + moviesStatus[i].time + ' ' + a[j])
     }
   }
-  console.log(movieSlot)
+
   const IfMoreThanTwoHours = el => {
     return el[0] >= 2
   }
@@ -47,6 +47,6 @@ const logic = (moviesStatus, cafeSlots) => {
     }
   }
   const aqq = movieSlot.filter(IfMoreThanTwoHours).map(val => val.split(' '))
-  console.log(aqq.map(movieName))
-  // console.log(aqq)
 }
+
+module.exports = { logic }

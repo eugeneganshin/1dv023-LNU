@@ -20,31 +20,31 @@ const charSchedulePromise = async names => {
 
 const availableDay = async schedule => {
   const daysArr = []
-  const ok = new RegExp('ok', 'ig')
-  const re = /ok/ig
-  if (Object.values(schedule).every(obj => ok.test(obj.Friday))) {
-    console.log('match 05')
-  } else if (Object.values(schedule).every(obj => ok.test(obj.Saturday))) {
-    console.log('match 06')
-  } else if (Object.values(schedule).every(obj => ok.test(obj.Sunday))) {
-    console.log('match 07')
+  const s = 'ok'
+  if (Object.values(schedule).every(obj => s === obj.Friday.toLowerCase())) {
+    const friday = '05'
+    daysArr.push(friday)
   }
-  // if (Object.values(schedule).every(obj => re.test(obj.Friday))) {
-  //   console.log('match 05')
-  // } else if (Object.values(schedule).every(obj => re.test(obj.Saturday))) {
-  //   console.log('match 06')
-  // } else if (Object.values(schedule).every(obj => re.test(obj.Sunday))) {
-  //   console.log('match 07')
-  // }
-  // console.log(daysArr)
+  if (Object.values(schedule).every(obj => s === obj.Saturday.toLowerCase())) {
+    const saturday = '06'
+    daysArr.push(saturday)
+  }
+  if (Object.values(schedule).every(obj => s === obj.Sunday.toLowerCase())) {
+    const sunday = '07'
+    daysArr.push(sunday)
+  }
   return daysArr
 }
 
-const generateLink = async (deuces, seats, races, day) => {
-  const deucesLink = `http://vhost3.lnu.se:20080/cinema/check?day=${day}&movie=${deuces}`
-  const seatsLink = `http://vhost3.lnu.se:20080/cinema/check?day=${day}&movie=${seats}`
-  const racesLink = `http://vhost3.lnu.se:20080/cinema/check?day=${day}&movie=${races}`
-  return [deucesLink, seatsLink, racesLink]
+const generateLink = async (deuces, seats, races, ...days) => {
+  const links = []
+  for (let i = 0; i < days.length; i++) {
+    const deucesLink = `http://vhost3.lnu.se:20080/cinema/check?day=${days[i]}&movie=${deuces}`
+    const seatsLink = `http://vhost3.lnu.se:20080/cinema/check?day=${days[i]}&movie=${seats}`
+    const racesLink = `http://vhost3.lnu.se:20080/cinema/check?day=${days[i]}&movie=${races}`
+    links.push(deucesLink, seatsLink, racesLink)
+  }
+  return links
 }
 
 module.exports = { charSchedulePromise, availableDay, generateLink }
