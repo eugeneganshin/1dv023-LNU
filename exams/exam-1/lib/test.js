@@ -1,8 +1,10 @@
+/**
+ * Progress code.
+ */
+
 const fetch = require('node-fetch')
 const got = require('got')
 const { JSDOM } = require('jsdom')
-const path = require('path')
-const fs = require('fs-extra')
 
 const { CookieJar } = require('tough-cookie')
 
@@ -131,6 +133,7 @@ const testGot = async () => {
     method: 'GET',
     cookieJar
   })
+  console.log(resPost)
   return resGet.body
 }
 
@@ -143,15 +146,10 @@ const parseCafe = async (data) => {
   return availableTime.flat().splice(0, len - 1).filter(findAllFridays)
 }
 
-const pathToFile = path.resolve('data', 'statuses.json')
-
 const url = 'http://vhost3.lnu.se:20080/weekend'
 
 const logic = (moviesStatus, cafeSlots) => {
-  // console.log(moviesStatus)
-  // console.log(cafeSlots)
   const movieslotSplit = cafeSlots.map(val => val.split(/(\d+)/))
-  // console.log(movieslotSplit)
 
   const splitNum = str => {
     const middle = Math.ceil(str.length / 2)
@@ -173,14 +171,12 @@ const logic = (moviesStatus, cafeSlots) => {
   }
   const a = movieslotSplit.map(val => whatDay(val[0]) + ' ' + splitNum(val[1]))
   const b = a.map(e => e.split(' '))
-  console.log(b)
   const movieSlot = []
   for (let i = 0; i < moviesStatus.length; i++) {
     for (let j = 0; j < a.length; j++) {
       movieSlot.push((parseFloat(b[j][1]).toFixed(2) - parseInt(moviesStatus[i].time)).toFixed(2) + ' ' + moviesStatus[i].movie + ' ' + moviesStatus[i].time + ' ' + a[j])
     }
   }
-  console.log(movieSlot)
   const IfMoreThanTwoHours = el => {
     return el[0] >= 2
   }
@@ -204,6 +200,7 @@ const main = async (url) => {
   try {
     const startPage = getHTML(url)
     const [calendar, cinema, dinner] = await getInitialLinks(startPage)
+    console.log(dinner)
 
     const [paul, peter, mary] = await parseCalendar(calendar)
     const [deuces, seats, races] = await parseCinema(cinema)
@@ -222,6 +219,3 @@ const main = async (url) => {
 }
 
 main(url)
-
-// movie 02 at 16:00 and movie 03 at 16:00
-// table empty at 18:20

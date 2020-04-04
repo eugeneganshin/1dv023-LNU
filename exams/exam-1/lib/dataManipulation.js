@@ -1,4 +1,4 @@
-const { getHTML, getJSON } = require('./simpleParse')
+const { getHTML } = require('./simpleParse')
 const { JSDOM } = require('jsdom')
 
 const charSchedulePromise = async names => {

@@ -1,9 +1,6 @@
 const logic = (moviesStatus, cafeSlots) => {
   const movieslotSplit = cafeSlots.map(val => val.split(/(\d+)/))
 
-  // console.log(moviesStatus)
-  // console.log(cafeSlots)
-
   const splitNum = str => {
     const middle = Math.ceil(str.length / 2)
     const s1 = str.slice(0, middle)
@@ -47,6 +44,7 @@ const logic = (moviesStatus, cafeSlots) => {
     }
   }
   const aqq = movieSlot.filter(IfMoreThanTwoHours).map(val => val.split(' '))
+  return aqq.map(movieName)
 }
 
 module.exports = { logic }
