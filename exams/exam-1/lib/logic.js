@@ -1,3 +1,11 @@
+/**
+ * Analyzes given arguments and creates a new array based on the difference between time of the movie and time of available cafe table.
+ * The difference between the film and the cafe should be at least two hours.
+ *
+ * @param {Array} moviesStatus Array of objects with movie statuses.
+ * @param {Array} cafeSlots Array of available cafe tables.
+ * @returns {Array} An array with final results. The results suggests the movie and time and then suggests the time to book the cafe table.
+ */
 const logic = (moviesStatus, cafeSlots) => {
   const movieslotSplit = cafeSlots.map(val => val.split(/(\d+)/))
 
@@ -20,18 +28,19 @@ const logic = (moviesStatus, cafeSlots) => {
     }
   }
   const a = movieslotSplit.map(val => whatDay(val[0]) + ' ' + splitNum(val[1]))
-  const b = a.map(e => e.split(' '))
+  const slot = a.map(e => e.split(' '))
 
-  const movieSlot = []
+  const movieSlots = []
   for (let i = 0; i < moviesStatus.length; i++) {
     for (let j = 0; j < a.length; j++) {
-      movieSlot.push((parseFloat(b[j][1]).toFixed(2) - parseInt(moviesStatus[i].time)).toFixed(2) + ' ' + moviesStatus[i].movie + ' ' + moviesStatus[i].time + ' ' + a[j])
+      movieSlots.push((parseFloat(slot[j][1]).toFixed(2) - parseInt(moviesStatus[i].time)).toFixed(2) + ' ' + moviesStatus[i].movie + ' ' + moviesStatus[i].time + ' ' + a[j])
     }
   }
 
   const IfMoreThanTwoHours = el => {
     return el[0] >= 2
   }
+
   const movieName = el => {
     if (el[1] === '01') {
       return `On ${el[3]} the movie "The Flying Deuces" starts at ${el[2]} and there is a free table between ${el[4]}`
@@ -43,8 +52,9 @@ const logic = (moviesStatus, cafeSlots) => {
       return 'No such movie'
     }
   }
-  const aqq = movieSlot.filter(IfMoreThanTwoHours).map(val => val.split(' '))
-  return aqq.map(movieName)
+  const suggestions = movieSlots.filter(IfMoreThanTwoHours).map(val => val.split(' '))
+  const setSuggestions = new Set(suggestions.map(movieName))
+  return setSuggestions
 }
 
 module.exports = { logic }

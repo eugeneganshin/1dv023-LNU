@@ -1,11 +1,16 @@
-const { getHTML, getInitLinks } = require('./lib/simpleParse')
-const { parseCalendar, parseCinema, parseMovies, testGot, parseCafe } = require('./lib/parsers')
+const { getHTML, getInitLinks } = require('./lib/helpers')
+const { parseCalendar, parseCinema, parseMovies, auth, parseCafe } = require('./lib/parsers')
 const { charSchedulePromise, availableDay, generateLink } = require('./lib/dataManipulation')
 const { logic } = require('./lib/logic')
 
-const url1 = 'http://vhost3.lnu.se:20080/weekend'
-const url2 = 'http://cscloud304.lnu.se:8080/'
+const url1 = 'http://vhost3.lnu.se:20080/weekend' // test this url in main()
+const url2 = 'http://cscloud304.lnu.se:8080/' // test this url in main()
 
+/**
+ * The logic of the application.
+ *
+ * @param {string} url Url of the site to scrape.
+ */
 const main = async url => {
   try {
     const startPage = await getHTML(url)
@@ -20,14 +25,17 @@ const main = async url => {
 
     const availableMovies = await parseMovies(movieLinks)
 
-    const cafePage = await testGot(dinnerUrl)
+    const cafePage = await auth(dinnerUrl)
     const cafeSlots = await parseCafe(cafePage, ...days)
 
-    const result = await logic(availableMovies, cafeSlots)
-    console.log(result)
+    const suggesitons = await logic(availableMovies, cafeSlots)
+
+    console.log('Recommendations')
+    console.log('===============')
+    console.log(suggesitons)
   } catch (error) {
     console.error(error)
   }
 }
 
-main(url2)
+main(url1)

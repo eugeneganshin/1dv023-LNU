@@ -2,8 +2,13 @@ const { JSDOM } = require('jsdom')
 const got = require('got')
 const { CookieJar } = require('tough-cookie')
 
-const { getHTML, getJSON } = require('./simpleParse')
+const { getHTML, getJSON } = require('./helpers')
 
+/**
+ * Takes a link and parses the page. Searches for all <a> tags to extract names.
+ *
+ * @param {string} url Url of the page to be parsed.
+ */
 const parseCalendar = async url => {
   try {
     const data = await getHTML(url)
@@ -17,7 +22,12 @@ const parseCalendar = async url => {
   }
 }
 
-const parseCinema = async (url, day) => {
+/**
+ * Takes a link and parses the page. Searches for all tags with id="movie" to extract their values.
+ *
+ * @param {string} url Url of the page to be parsed.
+ */
+const parseCinema = async (url) => {
   try {
     const data = await getHTML(url)
     const dom = new JSDOM(data)
@@ -29,6 +39,11 @@ const parseCinema = async (url, day) => {
   }
 }
 
+/**
+ * Takes an array of urls and parses each link with getJSON function to further filter it if the movie is available.
+ *
+ * @param {Array} movieLinks Array of strings with urls.
+ */
 const parseMovies = async movieLinks => {
   try {
     const promises = movieLinks.map(async link => getJSON(link))
@@ -47,7 +62,12 @@ params.append('username', 'zeke')
 params.append('password', 'coys')
 params.append('submit', 'login')
 
-const testGot = async (url) => {
+/**
+ * Uses Got package to POST and GET passord and username.
+ *
+ * @param {string} url Url of the page to POST and GET.
+ */
+const auth = async (url) => {
   const cookieJar = new CookieJar()
   const resPost = await got(url + '/login', {
     form: params,
@@ -62,6 +82,13 @@ const testGot = async (url) => {
   return resGet.body
 }
 
+/**
+ * Parses the page and searches for all <input> tags values. Based on the values of days that are available and values of input tags,
+ * creates an array of times when tables are free in cafe.
+ *
+ * @param {string} data HTML page.
+ * @param  {...Array} days Array of days that are fit.
+ */
 const parseCafe = async (data, ...days) => {
   try {
     const dom = new JSDOM(data)
@@ -90,4 +117,4 @@ const parseCafe = async (data, ...days) => {
   }
 }
 
-module.exports = { parseCalendar, parseCinema, parseMovies, parseCafe, testGot }
+module.exports = { parseCalendar, parseCinema, parseMovies, parseCafe, auth }
