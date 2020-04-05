@@ -63,7 +63,7 @@ params.append('password', 'coys')
 params.append('submit', 'login')
 
 /**
- * Uses Got package to POST and GET passord and username.
+ * Uses Got package to POST and GET password and username.
  *
  * @param {string} url Url of the page to POST and GET.
  */

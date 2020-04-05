@@ -38,4 +38,4 @@ const main = async url => {
   }
 }
 
-main(url1)
+main(url2)
