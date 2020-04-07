@@ -1,8 +1,11 @@
 <div class="container">
  <div class="messages"></div>
  <div class="menu">
-  <textarea id="input-snippet"></textarea>
-  <button id="send">Send</button>
+  <form method="POST" action="/new" name="input-snippet-form">
+    <label for="input-snippet">Type your snippet</label>
+    <textarea name="input-snippet-text"></textarea>
+    <input type="submit" class="button" name="input-snippet">
+  </form>
  </div>
 </div>
 

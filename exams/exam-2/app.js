@@ -33,7 +33,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 /**
  * Routes.
  */
-app.use('/', require('./routes/snippetRoute'))
+app.use('/', require('./routes/homeRouter'))
 app.use('*', (req, res, next) => next(createError(404)))
 
 /**
