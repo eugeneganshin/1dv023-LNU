@@ -5,12 +5,10 @@
       <p>{{viewData.text}}</p>
     </div>
   {{/if}}
-  
-
-
   </div>
+  
   <div class="addSnippet">
-    <form>
+    <form method="POST" action="/" name="inputForm">
       <label for="input-snippet" class="hidden">Type your snippet</label>
       <input class="input" name="inputText" type="text" placeholder="Add snippet...">
       <input class="submit" type="submit" value="Submit">

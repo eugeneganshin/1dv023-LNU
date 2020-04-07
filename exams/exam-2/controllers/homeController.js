@@ -6,6 +6,7 @@ const indexPost = (req, res) => {
   const viewData = {
     text: req.body.inputText
   }
+  console.log(req.body)
   res.render('snippets/index', { viewData })
 }
 
