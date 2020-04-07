@@ -26,11 +26,12 @@ html, body {
 
 .main {
   padding: 1rem;
+  background-color: #EFF0F1;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr  auto;
   gap: 1px 1px;
-  grid-template-areas: "snippet snippet snippet" "snippet snippet snippet";
+  grid-template-areas: "snippets snippets snippets" "addSnippet addSnippet addSnippet";
   grid-area: main;
 }
 
@@ -46,12 +47,42 @@ html, body {
 
 .snippet { grid-area: snippet; }
 
+.addSnippet { grid-area: addSnippet; }
 
-#input-snippet {
-  resize: none;
-  overflow: hidden;
-  height: 50px;
-  min-width: 20rem;
-  min-height: 50px;
-  max-height: 200px;
+#addSnippet, #addSnippetBtn {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 20px;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+
+.hidden {
+  visibility: hidden;
+  width: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.input,
+.submit {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 20px;
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+
+.input {
+    border: 1px solid lightgray;
+}
+
+.submit {
+    background-color: rgb(156, 235, 156);
+    /**
+     * If the input field has a border,
+     * you need it here too to achieve equal heights.
+     */
+    border: 1px solid transparent;
 }

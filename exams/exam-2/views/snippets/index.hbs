@@ -1,28 +1,34 @@
 <div class="main">
-  <div class="snippet"></div>
-  <div class="snippet"></div>
-  <div class="snippet"></div>
-  <div class="snippet"></div>
-  <div class="snippet"></div>
-  <div class="snippet"></div>
-</div>
-
-{{!-- <div class="container">
- <div class="messages"></div>
- <div class="menu">
-  <form method="POST" action="/" name="inputForm">
-    <label for="input-snippet">Type your snippet</label>
-    <textarea name="inputText"></textarea>
-    <input type="submit" class="button" name="inputSnippet" id="input-snippet">
-  </form>
- </div>
-</div>
-
-
+  <div class="snippets">
   {{#if viewData}}
-  <div class="view">
-  <p>{{viewData.text}}</p>
-  </div>
-  {{/if}} --}}
+    <div class="snippet">
+      <p>{{viewData.text}}</p>
+    </div>
+  {{/if}}
+  
 
-<script src="/js/index.js"></script>
+
+  </div>
+  <div class="addSnippet">
+    <form>
+      <label for="input-snippet" class="hidden">Type your snippet</label>
+      <input class="input" name="inputText" type="text" placeholder="Add snippet...">
+      <input class="submit" type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+ {{!-- 
+ <form method="POST" action="/" name="inputForm">
+      <label for="input-snippet">Type your snippet</label>
+      <textarea name="inputText"></textarea>
+      <input type="submit" class="button" name="inputSnippet" id="input-snippet">
+    </form>
+
+<script src="/js/index.js"></script> --}}
+
+{{!-- <form method="POST" action="/" name="inputForm">
+      <label for="input-snippet" class="hidden">Type your snippet</label>
+      <textarea name="inputText" id="addSnippet"></textarea>
+      <input type="submit" class="button" name="inputSnippet" id="addSnippetBtn" value="Submit">
+    </form> --}}
