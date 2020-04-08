@@ -45,7 +45,7 @@ templateC.innerHTML = `
 
 <div class="addSnippet">
   <form method="POST" action="/create" name="inputForm" id="txtForm">
-    <textarea name="inputText" class="txtArea">Hello</textarea>
+    <textarea name="inputText" class="txtArea"></textarea>
     <input class="submit" type="submit" value="Submit">
   </form>
 </div>
@@ -65,16 +65,31 @@ class CustomInput extends window.HTMLElement {
 
   connectedCallback () {
     this.txtArea.addEventListener('input', e => {
-      console.log(this.txtArea.scrollHeight)
-      if (this.txtArea.scrollHeight > 121) {
-        this.txtArea.style.height = 5 + 'px'
-        this.txtArea.style.height = (this.txtArea.scrollHeight + 10) + 'px'
-      }
+      this._autoGrow()
+      this._prettify()
     })
   }
 
   _autoGrow () {
-    console.log(this)
+    if (this.txtArea.scrollHeight > 121) {
+      this.txtArea.style.height = 5 + 'px'
+      this.txtArea.style.height = (this.txtArea.scrollHeight + 10) + 'px'
+    }
+  }
+
+  _prettify (e) {
+    const str = this.txtArea.value
+    if (str.length > 6 &&
+      str.charAt(0) === '`' &&
+      str.charAt(1) === '`' &&
+      str.charAt(2) === '`' &&
+      str.charAt(str.length - 1) === '`' &&
+      str.charAt(str.length - 2) === '`' &&
+      str.charAt(str.length - 3) === '`'
+    ) {
+      console.log(this.txtArea.value)
+      // if success replace first lines of code with pre code and last lines ore code pre
+    }
   }
 }
 

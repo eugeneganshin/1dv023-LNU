@@ -2,12 +2,12 @@
   {{#if viewData.snippets.length}}
     {{#each viewData.snippets}}
     <div class="snippet">
-      <p class="break">{{this.value}}</p>
+      <p class="break"><pre class="prettyprint">{{this.value}}</pre></p>
     </div>
     {{/each}}
     {{else}}
     <div class="snippet">
-      <p>No snippets so far</p>
+     <p>No snippets so far</p>
     </div>
   {{/if}}
 </div>
