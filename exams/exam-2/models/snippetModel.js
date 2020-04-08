@@ -6,7 +6,7 @@ const snippetModel = new Schema({
     type: String,
     required: '`{PATH}` is required!',
     minlength: [1, '{VALUE} is below the limit of {MINLENGTH}'],
-    maxlength: [300, '{VALUE} exceeds the limit of {MAXLENGTH}']
+    maxlength: [1000, '{VALUE} exceeds the limit of {MAXLENGTH}']
   },
   // timestamps: true,
   versionKey: false

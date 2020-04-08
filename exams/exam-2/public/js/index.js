@@ -5,7 +5,6 @@ templateC.innerHTML = `
 <style>
  .addSnippet{
   position: relative;
-  min-width: 400px;
  }
 
  .txtArea{
@@ -13,7 +12,8 @@ templateC.innerHTML = `
   max-height: 150px;
   width: 100%;
   resize: none;
-  overflow: hidden;
+  overflow-y: scroll;
+  
   margin:0;
   border-color: rgba(255,255,255,0);
  }
@@ -21,12 +21,22 @@ templateC.innerHTML = `
  .submit{
   position:absolute;
   bottom:8px;
-  right:15px;
-  background-color: #2f3745;
-  padding:4px;
-  color:wheat;
-  cursor:pointer;
+  right:20px;
+  background-color: #33B679;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.3;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
  }
+
+ .submit:hover {opacity: 1}
 
  #txtForm{
   padding-right: 3px;

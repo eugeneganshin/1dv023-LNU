@@ -1,24 +1,20 @@
 <div class="main">
-  <div class="snippets">
-    <div class="snip">1</div>
-    <div class="snip">2</div>
-    <div class="snip">3</div>
-  </div>
-  <div class="snippets">
-    <div class="snip">1</div>
-    <div class="snip">2</div>
-    <div class="snip">3</div>
-  </div>
-  <div class="snippets">
-    <div class="snip">1</div>
-    <div class="snip">2</div>
-    <div class="snip">3</div>
-  </div>
+  {{#if viewData.snippets.length}}
+    {{#each viewData.snippets}}
+    <div class="snippet">
+      <p class="break">{{this.value}}</p>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="snippet">
+      <p>No snippets so far</p>
+    </div>
+  {{/if}}
 </div>
 <div class="menu">
-  <div class="leftMenu">as</div>
+  <div class="leftMenu"></div>
   <div class="midMenu">
-    a
+    <x-custom></x-custom>
   </div>
-  <div class="rightMenu">as</div>
+  <div class="rightMenu"></div>
 </div>
