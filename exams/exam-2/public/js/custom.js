@@ -1,5 +1,3 @@
-// import { CustomInput } from './custom'
-
 const templateC = document.createElement('template')
 templateC.innerHTML = `
 <style>
@@ -34,7 +32,7 @@ templateC.innerHTML = `
 </div>
 `
 
-class CustomInput extends window.HTMLElement {
+export class CustomInput extends window.HTMLElement {
   constructor () {
     super()
 
@@ -52,11 +50,3 @@ class CustomInput extends window.HTMLElement {
 }
 
 window.customElements.define('x-custom', CustomInput)
-
-// const textArea = document.querySelector('#input-snippet')
-// textArea.addEventListener('input', function () {
-//   console.log(this)
-//   this.style.height = (this.scrollHeight) + 'px'
-// })
-
-console.log('lol')
