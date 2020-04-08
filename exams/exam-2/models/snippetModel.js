@@ -8,7 +8,7 @@ const snippetModel = new Schema({
     minlength: [1, '{VALUE} is below the limit of {MINLENGTH}'],
     maxlength: [300, '{VALUE} exceeds the limit of {MAXLENGTH}']
   },
-  timestamps: true,
+  // timestamps: true,
   versionKey: false
 })
 

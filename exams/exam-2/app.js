@@ -9,7 +9,14 @@ const session = require('express-session')
 const path = require('path')
 const logger = require('morgan')
 
+const mongoose = require('./configs/mongoose')
+
 const app = express()
+
+mongoose.connect().catch(err => {
+  console.error(err)
+  process.exit(1)
+})
 
 /**
  * View engine setup.
