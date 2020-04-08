@@ -1,0 +1,102 @@
+<div class="main">
+  <div class="snippets">
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+  {{#if viewData.snippets.length}}
+    {{#each viewData.snippets}}
+    <div class="snippet">
+      <p>{{this.value}}</p>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="snippet">
+      <p>No snippets so far</p>
+    </div>
+  {{/if}}
+  </div>
+  <div class="sippets">
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+  </div>
+  <div class="sippets">
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+  </div>
+  <div class="sippets">
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+  </div>
+  <div class="sippets">
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+  </div>
+  <div class="sippets">
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+    <div class="snippet"><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></div>
+  </div>
+  
+  <div class="addSnippet">
+    <div class="left"></div>
+    <div class="mid"><x-custom></x-custom></div>
+    <div class="right"></div>
+    {{!-- <form method="POST" action="/create" name="inputForm">
+      <label for="input-snippet" class="hidden">Type your snippet</label>
+      <input class="input" name="inputText" type="text" placeholder="Add snippet...">
+      <input class="submit" type="submit" value="Submit">
+    </form> --}}
+  </div>
+</div>
+
+
+
+
+  {{!-- <div class="snippets">
+  {{#if viewData.snippets.length}}
+    {{#each viewData.snippets}}
+    <div class="snippet">
+      <p>{{this.value}}</p>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="snippet">
+      <p>No snippets so far</p>
+    </div>
+  {{/if}}
+  </div>
+  
+  <div class="addSnippet"> --}}
+    
+    {{!-- <form method="POST" action="/create" name="inputForm">
+      <label for="input-snippet" class="hidden">Type your snippet</label>
+      <input class="input" name="inputText" type="text" placeholder="Add snippet...">
+      <input class="submit" type="submit" value="Submit">
+    </form> --}}
+  {{!-- </div> --}}
+
+
+ {{!-- 
+ <form method="POST" action="/" name="inputForm">
+      <label for="input-snippet">Type your snippet</label>
+      <textarea name="inputText"></textarea>
+      <input type="submit" class="button" name="inputSnippet" id="input-snippet">
+    </form>
+
+<script src="/js/index.js"></script> --}}
+
+{{!-- <form method="POST" action="/" name="inputForm">
+      <label for="input-snippet" class="hidden">Type your snippet</label>
+      <textarea name="inputText" id="addSnippet"></textarea>
+      <input type="submit" class="button" name="inputSnippet" id="addSnippetBtn" value="Submit">
+    </form> --}}

@@ -13,7 +13,6 @@ templateC.innerHTML = `
  }
 
  .txtArea{
-  width: 600px;
   max-width: 600px;
   height:200px;
   margin:0;

@@ -4,15 +4,18 @@ const templateC = document.createElement('template')
 templateC.innerHTML = `
 <style>
  .addSnippet{
-   position: relative;
+  position: relative;
+  min-width: 400px;
  }
 
  .txtArea{
-  width:400px;
-  height:200px;
+  min-height: 100px;
+  max-height: 150px;
+  width: 100%;
+  resize: none;
+  overflow: hidden;
   margin:0;
   border-color: rgba(255,255,255,0);
-  padding:10px;
  }
 
  .submit{
@@ -24,10 +27,14 @@ templateC.innerHTML = `
   color:wheat;
   cursor:pointer;
  }
+
+ #txtForm{
+  padding-right: 3px;
+ }
 </style>
 
 <div class="addSnippet">
-  <form method="POST" action="/create" name="inputForm">
+  <form method="POST" action="/create" name="inputForm" id="txtForm">
     <textarea name="inputText" class="txtArea">Hello</textarea>
     <input class="submit" type="submit" value="Submit">
   </form>
@@ -47,7 +54,17 @@ class CustomInput extends window.HTMLElement {
   }
 
   connectedCallback () {
+    this.txtArea.addEventListener('input', e => {
+      console.log(this.txtArea.scrollHeight)
+      if (this.txtArea.scrollHeight > 121) {
+        this.txtArea.style.height = 5 + 'px'
+        this.txtArea.style.height = (this.txtArea.scrollHeight + 10) + 'px'
+      }
+    })
+  }
 
+  _autoGrow () {
+    console.log(this)
   }
 }
 
@@ -58,5 +75,3 @@ window.customElements.define('x-custom', CustomInput)
 //   console.log(this)
 //   this.style.height = (this.scrollHeight) + 'px'
 // })
-
-console.log('lol')
