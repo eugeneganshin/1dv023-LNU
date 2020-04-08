@@ -1,15 +1,23 @@
 const templateC = document.createElement('template')
 templateC.innerHTML = `
+<div class="addSnippet">
+  <form method="POST" action="/create" name="inputForm">
+    <textarea name="inputText" class="txtArea">Hello</textarea>
+    <input class="submit" type="submit" value="Submit">
+  </form>
+</div>
+
 <style>
  .addSnippet{
    position: relative;
  }
 
  .txtArea{
-  width:400px;
+  width: 600px;
+  max-width: 600px;
   height:200px;
   margin:0;
-  border-color: rgba(255,255,255,0);
+  border-color: rgba(255,255,255,255);
   padding:10px;
  }
 
@@ -23,13 +31,6 @@ templateC.innerHTML = `
   cursor:pointer;
  }
 </style>
-
-<div class="addSnippet">
-  <form method="POST" action="/create" name="inputForm">
-    <textarea name="inputText" class="txtArea">Hello</textarea>
-    <input class="submit" type="submit" value="Submit">
-  </form>
-</div>
 `
 
 export class CustomInput extends window.HTMLElement {
