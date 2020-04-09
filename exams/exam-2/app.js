@@ -8,8 +8,11 @@ const hbs = require('express-hbs')
 const session = require('express-session')
 const path = require('path')
 const logger = require('morgan')
+const helpersPackage = require('handlebars-helpers')
+const strings = helpersPackage.string()
 
 const mongoose = require('./configs/mongoose')
+const helpersHBS = require('./helpers')
 
 const app = express()
 
@@ -27,6 +30,15 @@ app.engine('hbs', hbs.express4({
 }))
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'views'))
+// app.set('helpers', hbs.handlebars.helpers) // dont think i need this
+
+/**
+ * HBS helpers.
+ */
+hbs.registerHelper('ifPre', helpersHBS.ifPre)
+hbs.registerHelper('startsWith', strings.startsWith)
+
+console.log(strings.startsWith)
 
 /**
  * Additional middleware.

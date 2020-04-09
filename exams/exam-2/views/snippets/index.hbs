@@ -1,9 +1,15 @@
 <div class="main">
   {{#if viewData.snippets.length}}
     {{#each viewData.snippets}}
-    <div class="snippet">
-      <p class="break"><pre class="prettyprint">{{this.value}}</pre></p>
-    </div>
+      {{#startsWith "   " this.value}}
+      <div class="snippet">
+        <p class="break"><pre class="prettyprint">{{this.value}}</pre></p>
+      </div>
+      {{else}}
+      <div class="snippet">
+        <p class="break">{{this.value}}</p>
+      </div>
+      {{/startsWith}}
     {{/each}}
     {{else}}
     <div class="snippet">
@@ -18,3 +24,5 @@
   </div>
   <div class="rightMenu"></div>
 </div>
+
+<script>console.log()</script>

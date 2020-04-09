@@ -1,38 +1,57 @@
+// import { CustomInput } from './custom'
+
 const templateC = document.createElement('template')
 templateC.innerHTML = `
-<div class="addSnippet">
-  <form method="POST" action="/create" name="inputForm">
-    <textarea name="inputText" class="txtArea">Hello</textarea>
-    <input class="submit" type="submit" value="Submit">
-  </form>
-</div>
-
 <style>
  .addSnippet{
-   position: relative;
+  position: relative;
  }
 
  .txtArea{
-  max-width: 600px;
-  height:200px;
+  min-height: 100px;
+  max-height: 150px;
+  width: 100%;
+  resize: none;
+  overflow-y: scroll;
+  
   margin:0;
-  border-color: rgba(255,255,255,255);
-  padding:10px;
+  border-color: rgba(255,255,255,0);
  }
 
  .submit{
   position:absolute;
   bottom:8px;
-  right:15px;
-  background-color: #2f3745;
-  padding:4px;
-  color:wheat;
-  cursor:pointer;
+  right:20px;
+  background-color: #33B679;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.3;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+ }
+
+ .submit:hover {opacity: 1}
+
+ #txtForm{
+  padding-right: 3px;
  }
 </style>
+
+<div class="addSnippet">
+  <form method="POST" action="/create" name="inputForm" id="txtForm">
+    <textarea name="inputText" class="txtArea"></textarea>
+    <input class="submit" type="submit" value="Submit">
+  </form>
+</div>
 `
 
-export class CustomInput extends window.HTMLElement {
+class CustomInput extends window.HTMLElement {
   constructor () {
     super()
 
@@ -45,8 +64,40 @@ export class CustomInput extends window.HTMLElement {
   }
 
   connectedCallback () {
+    this.txtArea.addEventListener('input', e => {
+      this._autoGrow()
+      // this._prettify()
+    })
+  }
 
+  _autoGrow () {
+    if (this.txtArea.scrollHeight > 121) {
+      this.txtArea.style.height = 5 + 'px'
+      this.txtArea.style.height = (this.txtArea.scrollHeight + 10) + 'px'
+    }
+  }
+
+  _prettify (e) {
+    const str = this.txtArea.value
+    if (str.length > 6 &&
+      str.charAt(0) === '`' &&
+      str.charAt(1) === '`' &&
+      str.charAt(2) === '`' &&
+      str.charAt(str.length - 1) === '`' &&
+      str.charAt(str.length - 2) === '`' &&
+      str.charAt(str.length - 3) === '`'
+    ) {
+      this.txtArea.value = `<pre class="prettyprint">${this.txtArea.value}</pre>`
+      console.log(this.txtArea.value)
+      // if success replace first lines of code with pre code and last lines ore code pre
+    }
   }
 }
 
 window.customElements.define('x-custom', CustomInput)
+
+// const textArea = document.querySelector('#input-snippet')
+// textArea.addEventListener('input', function () {
+//   console.log(this)
+//   this.style.height = (this.scrollHeight) + 'px'
+// })
