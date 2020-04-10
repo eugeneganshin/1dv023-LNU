@@ -1,0 +1,22 @@
+<div class="main">
+  <div class="snippet" id="preview">
+    {{#startsWith "   " viewData.value}}
+    <div class="previewItem">
+      <pre id="editing" class="prettyprint"><p class="break">{{viewData.value}}</p></pre>
+    </div>
+    {{else}}
+    <div class="previewItem">
+      <p class="break">{{viewData.value}}</p>
+    </div>
+    {{/startsWith}}
+    <div class="editItem">
+      <form method="post" action="/{{viewData.id}}/update">
+        <input type="hidden" name="id" value="{{viewData.id}}">
+        <textarea name="value" id="editTxtArea">{{viewData.value}}</textarea>
+        <button id="updateBtn" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="/js/txtAreaControl.js"></script>

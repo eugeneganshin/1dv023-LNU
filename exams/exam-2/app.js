@@ -35,10 +35,8 @@ app.set('views', path.join(__dirname, 'views'))
 /**
  * HBS helpers.
  */
-hbs.registerHelper('ifPre', helpersHBS.ifPre)
 hbs.registerHelper('startsWith', strings.startsWith)
-
-console.log(strings.startsWith)
+hbs.registerHelper('replace', strings.replace)
 
 /**
  * Additional middleware.

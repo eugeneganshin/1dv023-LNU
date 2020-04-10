@@ -24,20 +24,6 @@ html, body {
   padding: 1rem;
 }
 
-/* .main {
-  padding: 1rem;
-  background-color: #EFF0F1;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: repeat(auto-fit);
-  grid-template-areas: "snippet";
-  grid-auto-flow: dense;
- 
-  gap: 5px 5px;
-  
-  grid-area: main;
-
-} */
 
 .main {
   padding: 1rem;
@@ -76,33 +62,176 @@ html, body {
   margin: 0px;
 }
 
-/* .addSnippet { grid-area: addSnippet; } */
+.superHidden {
+  display: none;
+}
 
-/* #addSnippet, #addSnippetBtn {
+.superShow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.snippet{
+  background-color: rgb(233, 233, 233);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.buttonHolder {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.editBtn {
+  margin-right: 10px;
+  background-color: rgb(45, 117, 250);
+  color: white;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.3;
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 5px 20px 5px 20px;
+}
+
+.deleteBtn {
+  background-color: rgb(255, 110, 110);
+  color: white;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.3;
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 5px 10px 5px 10px;
+}
+
+.editBtn:hover {opacity: 1}
+.deleteBtn:hover {opacity: 1}
+
+#preview {
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+}
+
+#editTxtArea {
+  min-height: 300px;
+  max-height: 150px;
+  width: 100%;
+  resize: none;
+  overflow-y: scroll;
+  margin:0;
+  border-color: rgba(255,255,255,0);
+}
+
+#updateBtn {
+  /* position:relative;
+  bottom:8px;
+  right:20px; */
+  position: absolute;;
+  bottom: 15px;
+  right: 35px;
+  background-color: #33B679;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.3;
+  transition: 0.3s;
   display: inline-block;
-  padding: 10px 15px;
-  font-size: 20px;
-  border-radius: 0;
-  -webkit-appearance: none;
+  text-decoration: none;
+  cursor: pointer;
 }
 
+#updateBtn:hover {opacity: 1}
 
-
-
-.input,
-.submit {
-    display: inline-block;
-    padding: 10px 15px;
-    font-size: 20px;
-    border-radius: 0;
-    -webkit-appearance: none;
+#alert {
+  background-color: rgb(255, 208, 217);
+  transition: 0.3s;
 }
 
-.input {
-    border: 1px solid lightgray;
+.sureBtn {
+  background-color: rgb(255, 110, 110);
+  color: white;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 5px 10px 5px 10px;
+  margin-left: 20px;
 }
 
-.submit {
-    background-color: rgb(156, 235, 156);
-    border: 1px solid transparent;
+.notSureBtn {
+  background-color: #33B679;
+  color: white;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 5px 10px 5px 10px;
+  height: 34px;
+  margin-left: 10px;
+}
+
+.sureBtn:hover {opacity: 1}
+.notSureBtn:hover {opacity: 1}
+
+/* background-color: #33B679;
+color: white;
+border: none;
+text-align: center;
+font-size: 16px;
+opacity: 0.3;
+transition: 0.3s;
+cursor: pointer; */
+
+
+/* .submit{
+  position:absolute;
+  bottom:8px;
+  right:20px;
+  background-color: #33B679;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.3;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+ } */
+
+
+/* .main {
+  padding: 1rem;
+  background-color: #EFF0F1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(auto-fit);
+  grid-template-areas: "snippet";
+  grid-auto-flow: dense;
+ 
+  gap: 5px 5px;
+  
+  grid-area: main;
+
 } */

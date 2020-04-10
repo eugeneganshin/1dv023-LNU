@@ -1,47 +1,34 @@
 <div class="main">
-  <div class="snippets">
   {{#if viewData.snippets.length}}
     {{#each viewData.snippets}}
-    <div class="snippet">
-      <p>{{this.value}}</p>
-    </div>
+      {{#startsWith "   " this.value}}
+      <div class="snippet">
+        <p class="break"><pre class="prettyprint">{{this.value}}</pre></p>
+        <div class="buttonHolder">
+          <button class="editBtn">Edit</button>
+          <button class="deleteBtn">Delete</button>
+        </div>
+      </div>
+      {{else}}
+      <div class="snippet">
+        <p class="break">{{this.value}}</p>
+        <div class="buttonHolder">
+          <button class="editBtn">Edit</button>
+          <button class="deleteBtn">Delete</button>
+        </div>
+      </div>
+      {{/startsWith}}
     {{/each}}
     {{else}}
     <div class="snippet">
-      <p>No snippets so far</p>
+     <p>No snippets so far</p>
     </div>
   {{/if}}
-  </div>
-  
-  <div class="addSnippet">
-    <form method="POST" action="/create" name="inputForm">
-      <label for="input-snippet" class="hidden">Type your snippet</label>
-      <input class="input" name="inputText" type="text" placeholder="Add snippet...">
-      <input class="submit" type="submit" value="Submit">
-    </form>
-  </div>
 </div>
-
-{{!-- <div class="main">
-  <div class="snippets">
-  {{#if viewData.snippets.length}}
-    {{#each viewData.snippets}}
-    <div class="snippet">
-      <p>{{this.value}}</p>
-    </div>
-    {{/each}}
-    {{else}}
-    <div class="snippet">
-      <p>No snippets so far</p>
-    </div>
-  {{/if}}
+<div class="menu">
+  <div class="leftMenu"></div>
+  <div class="midMenu">
+    <x-custom></x-custom>
   </div>
-  
-  <div class="addSnippet">
-    <form method="POST" action="/create" name="inputForm">
-      <label for="input-snippet" class="hidden">Type your snippet</label>
-      <input class="input" name="inputText" type="text" placeholder="Add snippet...">
-      <input class="submit" type="submit" value="Submit">
-    </form>
-  </div>
-</div> --}}
+  <div class="rightMenu"></div>
+</div>

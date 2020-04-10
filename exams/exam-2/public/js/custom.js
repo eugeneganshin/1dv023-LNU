@@ -44,7 +44,7 @@ templateC.innerHTML = `
 </style>
 
 <div class="addSnippet">
-  <form method="POST" action="/create" name="inputForm" id="txtForm">
+  <form action="/create" method="POST" name="inputForm" id="txtForm">
     <textarea name="inputText" class="txtArea"></textarea>
     <input class="submit" type="submit" value="Submit">
   </form>
@@ -61,6 +61,7 @@ class CustomInput extends window.HTMLElement {
     this.addSnippetDiv = this.shadowRoot.querySelector('.addSnippet')
     this.txtArea = this.shadowRoot.querySelector('.txtArea')
     this.submitBtn = this.shadowRoot.querySelector('submit')
+    this.txtForm = this.shadowRoot.querySelector('#txtForm')
   }
 
   connectedCallback () {
@@ -95,9 +96,3 @@ class CustomInput extends window.HTMLElement {
 }
 
 window.customElements.define('x-custom', CustomInput)
-
-// const textArea = document.querySelector('#input-snippet')
-// textArea.addEventListener('input', function () {
-//   console.log(this)
-//   this.style.height = (this.scrollHeight) + 'px'
-// })
