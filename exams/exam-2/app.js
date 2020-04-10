@@ -12,7 +12,6 @@ const helpersPackage = require('handlebars-helpers')
 const strings = helpersPackage.string()
 
 const mongoose = require('./configs/mongoose')
-const helpersHBS = require('./helpers')
 
 const app = express()
 
@@ -30,7 +29,6 @@ app.engine('hbs', hbs.express4({
 }))
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'views'))
-// app.set('helpers', hbs.handlebars.helpers) // dont think i need this
 
 /**
  * HBS helpers.
@@ -52,6 +50,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
  * Routes.
  */
 app.use('/', require('./routes/homeRouter'))
+app.use('/snippets', require('./routes/snippetsRouter'))
 app.use('*', (req, res, next) => next(createError(404)))
 
 /**

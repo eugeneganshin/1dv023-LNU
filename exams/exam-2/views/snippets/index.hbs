@@ -5,12 +5,12 @@
       <div class="snippet">
         <p class="break"><pre class="prettyprint">{{this.value}}</pre></p>
         <div class="buttonHolder">
-          <a href="/{{this.id}}/edit" class="editBtn">Edit</a>
+          <a href="/snippets/{{this.id}}/edit" class="editBtn">Edit</a>
           <a class="deleteBtn">Delete</a>
         </div>
         <div class="superHidden">
           <p>Are you sure?</p>
-          <form action="{{this.id}}/remove" method="POST">
+          <form action="/snippets/{{this.id}}/remove" method="POST">
             <input type="hidden" name="id" value="{{this.id}}">
             <button type="submit" class="sureBtn">Yes</button>
           </form>
@@ -21,12 +21,12 @@
       <div class="snippet">
         <p class="break">{{this.value}}</p>
         <div class="buttonHolder">
-          <a href="/{{this.id}}/edit" class="editBtn">Edit</a>
+          <a href="/snippets/{{this.id}}/edit" class="editBtn">Edit</a>
           <a class="deleteBtn">Delete</a>
         </div>
         <div class="superHidden">
           <p>Are you sure?</p>
-          <form action="{{this.id}}/remove" method="POST">
+          <form action="/snippets/{{this.id}}/remove" method="POST">
             <input type="hidden" name="id" value="{{this.id}}">
             <button type="submit" class="sureBtn">Yes</button>
           </form>

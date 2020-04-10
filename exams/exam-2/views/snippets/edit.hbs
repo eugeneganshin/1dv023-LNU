@@ -10,7 +10,7 @@
     </div>
     {{/startsWith}}
     <div class="editItem">
-      <form method="post" action="/{{viewData.id}}/update">
+      <form method="post" action="/snippets/{{viewData.id}}/update">
         <input type="hidden" name="id" value="{{viewData.id}}">
         <textarea name="value" id="editTxtArea">{{viewData.value}}</textarea>
         <button id="updateBtn" type="submit">Submit</button>

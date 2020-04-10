@@ -9,6 +9,7 @@ Array.from(snippet).map(el => {
     }
     if (e.target.className === 'notSureBtn') {
       e.target.parentNode.parentNode.removeAttribute('id', 'alert')
+      e.target.parentNode.parentNode.setAttribute('id', 'normal')
       e.target.parentNode.parentNode.lastElementChild.setAttribute('class', 'superHidden')
       e.target.parentNode.previousElementSibling.style.display = 'flex'
     }
