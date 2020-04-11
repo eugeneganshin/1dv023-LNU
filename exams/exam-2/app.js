@@ -45,6 +45,24 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 // Sessions should be here.
+const sessionOptions = {
+  name: 'my crud app',
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 30 // one month
+  }
+}
+app.use(session(sessionOptions))
+app.use((req, res, next) => {
+  if (req.session.flash) {
+    res.locals.flash = req.session.flash
+    delete req.session.flash
+  }
+
+  next()
+})
 
 /**
  * Routes.

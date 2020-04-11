@@ -1,4 +1,5 @@
 <div class="main">
+  {{>flash}}
   {{#if viewData.snippets.length}}
     {{#each viewData.snippets}}
       {{#startsWith "   " this.value}}

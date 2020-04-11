@@ -82,10 +82,23 @@ snippetsController.update = async (req, res) => {
 snippetsController.delete = async (req, res) => {
   try {
     await SnippetModel.deleteOne({ _id: req.body.id })
+    req.session.flash = { type: 'success', text: 'The snippet was deleted succesfully.' }
     res.redirect('..')
   } catch (err) {
+    req.session.flash = { type: 'danger', text: err.message }
     console.error(err)
   }
 }
+
+// snippetsController.authorize = async (req, res, next) => {
+// // verify if the user is logged on (aka check cookies????)
+//   if (/* check if user is authorized */) {
+//     const error = new Error('Forbidden')
+//     error.statusCode = 403
+//     return next(error)
+//   }
+
+//   next()
+// }
 
 module.exports = snippetsController
