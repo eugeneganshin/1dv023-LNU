@@ -2,9 +2,11 @@
 
 const express = require('express')
 const snippetsController = require('../controllers/snippetsController')
+const authController = require('../controllers/authController')
+// const { userOnly } = require('../lib/userOnly')
 const router = express.Router()
 
-router.get('/', snippetsController.index)
+router.get('/', authController.userOnly, snippetsController.index)
 
 router.get('/new', snippetsController.new)
 

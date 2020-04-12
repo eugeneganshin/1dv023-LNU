@@ -46,7 +46,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 // Sessions should be here.
 const sessionOptions = {
-  name: 'my crud app',
+  name: process.env.COOKIE_NAME,
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
@@ -56,6 +56,9 @@ const sessionOptions = {
 }
 app.use(session(sessionOptions))
 app.use((req, res, next) => {
+  if (req.session.userId) {
+    res.locals.userId = req.session.userId
+  }
   if (req.session.flash) {
     res.locals.flash = req.session.flash
     delete req.session.flash
@@ -68,7 +71,8 @@ app.use((req, res, next) => {
  * Routes.
  */
 app.use('/', require('./routes/homeRouter'))
-app.use('/snippets', require('./routes/snippetsRouter'))
+app.use('/auth', require('./routes/authRoutes'))
+app.use('/user', require('./routes/snippetsRouter'))
 app.use('*', (req, res, next) => next(createError(404)))
 
 /**
@@ -79,6 +83,12 @@ app.use((err, req, res, next) => {
     return res
       .status(404)
       .sendFile(path.join(__dirname, 'views', 'errors', '404.html'))
+  }
+
+  if (err.statusCode === 403) {
+    return res
+      .status(403)
+      .sendFile(path.join(__dirname, 'views', 'errors', '403.html'))
   }
 
   // Not working unless you change NODE_ENV to production

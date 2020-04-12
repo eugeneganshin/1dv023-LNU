@@ -1,3 +1,4 @@
+{{#if userId}}
 <div class="main">
   {{>flash}}
   {{#if viewData.snippets.length}}
@@ -6,12 +7,12 @@
       <div class="snippet">
         <p class="break"><pre class="prettyprint">{{this.value}}</pre></p>
         <div class="buttonHolder">
-          <a href="/snippets/{{this.id}}/edit" class="editBtn">Edit</a>
+          <a href="/auth/{{this.id}}/edit" class="editBtn">Edit</a>
           <a class="deleteBtn">Delete</a>
         </div>
         <div class="superHidden">
           <p>Are you sure?</p>
-          <form action="/snippets/{{this.id}}/remove" method="POST">
+          <form action="/user/{{this.id}}/remove" method="POST">
             <input type="hidden" name="id" value="{{this.id}}">
             <button type="submit" class="sureBtn">Yes</button>
           </form>
@@ -22,12 +23,12 @@
       <div class="snippet">
         <p class="break">{{this.value}}</p>
         <div class="buttonHolder">
-          <a href="/snippets/{{this.id}}/edit" class="editBtn">Edit</a>
+          <a href="/user/{{this.id}}/edit" class="editBtn">Edit</a>
           <a class="deleteBtn">Delete</a>
         </div>
         <div class="superHidden">
           <p>Are you sure?</p>
-          <form action="/snippets/{{this.id}}/remove" method="POST">
+          <form action="/user/{{this.id}}/remove" method="POST">
             <input type="hidden" name="id" value="{{this.id}}">
             <button type="submit" class="sureBtn">Yes</button>
           </form>
@@ -49,5 +50,26 @@
   </div>
   <div class="rightMenu"></div>
 </div>
+{{else}}
+<div class="main">
+  {{#if viewData.snippets.length}}
+    {{#each viewData.snippets}}
+      {{#startsWith "   " this.value}}
+      <div class="snippet">
+        <p class="break"><pre class="prettyprint">{{this.value}}</pre></p>
+      </div>
+      {{else}}
+      <div class="snippet">
+        <p class="break">{{this.value}}</p>
+      </div>
+      {{/startsWith}}
+    {{/each}}
+    {{else}}
+    <div class="snippet">
+     <p>No snippets so far</p>
+    </div>
+  {{/if}}
+</div>
+{{/if}}
 
 <script type="module" src="/js/buttonControl.js"></script>

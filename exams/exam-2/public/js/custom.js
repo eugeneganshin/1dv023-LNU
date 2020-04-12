@@ -44,7 +44,7 @@ templateC.innerHTML = `
 </style>
 
 <div class="addSnippet">
-  <form action="/snippets/create" method="POST" name="inputForm" id="txtForm">
+  <form action="/user/create" method="POST" name="inputForm" id="txtForm">
     <textarea name="inputText" class="txtArea"></textarea>
     <input class="submit" type="submit" value="Submit">
   </form>

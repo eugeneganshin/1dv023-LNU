@@ -12,13 +12,10 @@ snippetsController.index = async (req, res, next) => {
       }))
     }
     res.render('snippets/index', { viewData })
-    // console.log(viewData.snippets)
   } catch (err) {
     console.error(err)
   }
 }
-
-// Controllers below should go to separate controller
 
 // New GET
 snippetsController.new = async (req, res) => {
@@ -35,6 +32,7 @@ snippetsController.create = async (req, res) => {
       value: req.body.inputText
     })
     await snippets.save()
+
     res.redirect('.')
   } catch (err) {
     console.error(err)
@@ -48,7 +46,6 @@ snippetsController.create = async (req, res) => {
 // Edit GET
 snippetsController.edit = async (req, res) => {
   try {
-    console.log(req.params.id)
     const result = await SnippetModel.findOne({ _id: req.params.id })
     const viewData = {
       value: result.value,
@@ -69,7 +66,7 @@ snippetsController.update = async (req, res) => {
     })
 
     if (result.nModified === 1) {
-      console.log('Has been modified')
+      console.log('Has been modified') // flash message here
     } else {
       console.log('Hasnt been modified')
     }
@@ -83,22 +80,12 @@ snippetsController.delete = async (req, res) => {
   try {
     await SnippetModel.deleteOne({ _id: req.body.id })
     req.session.flash = { type: 'success', text: 'The snippet was deleted succesfully.' }
+
     res.redirect('..')
   } catch (err) {
     req.session.flash = { type: 'danger', text: err.message }
     console.error(err)
   }
 }
-
-// snippetsController.authorize = async (req, res, next) => {
-// // verify if the user is logged on (aka check cookies????)
-//   if (/* check if user is authorized */) {
-//     const error = new Error('Forbidden')
-//     error.statusCode = 403
-//     return next(error)
-//   }
-
-//   next()
-// }
 
 module.exports = snippetsController

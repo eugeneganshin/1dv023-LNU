@@ -1,0 +1,20 @@
+<div class="main">
+  {{#if viewData.snippets.length}}
+    {{#each viewData.snippets}}
+      {{#startsWith "   " this.value}}
+      <div class="snippet">
+        <p class="break"><pre class="prettyprint">{{this.value}}</pre></p>
+      </div>
+      {{else}}
+      <div class="snippet">
+        <p class="break">{{this.value}}</p>
+      </div>
+      {{/startsWith}}
+    {{/each}}
+    {{else}}
+    <div class="snippet">
+     <p>No snippets so far</p>
+    </div>
+  {{/if}}
+</div>
+<script type="module" src="/js/buttonControl.js"></script>
