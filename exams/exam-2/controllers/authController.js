@@ -47,14 +47,18 @@ authController.loginPost = async (req, res) => {
 }
 
 authController.logout = async (req, res, next) => {
-  req.session.destroy(err => {
-    if (err) {
-      return res.redirect('/snippets')
-    }
+  try {
+    req.session.destroy(err => {
+      if (err) {
+        return res.redirect('/user')
+      }
 
-    res.clearCookie(process.env.COOKIE_NAME)
-    res.redirect('/auth/login')
-  })
+      res.clearCookie(process.env.COOKIE_NAME)
+      res.redirect('/auth/login')
+    })
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 authController.userOnly = async (req, res, next) => {
