@@ -65,6 +65,7 @@ authController.userOnly = async (req, res, next) => {
     return next(error)
   }
   next()
+  // expand the function when you add logout or change password
 
   // if connection has been restarted with mongoDB(i.e., server was restarded)
   // the cookie is lost. Use connect-mongo to prevent that (or Redis) and try JWT

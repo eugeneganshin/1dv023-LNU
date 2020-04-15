@@ -10,15 +10,14 @@ const path = require('path')
 const logger = require('morgan')
 const helpersPackage = require('handlebars-helpers')
 const strings = helpersPackage.string()
+const helmet = require('helmet')
+const rateLimit = require('express-rate-limit')
+const mongoSanitize = require('express-mongo-sanitize')
+const xss = require('xss-clean')
 
 const mongoose = require('./configs/mongoose')
 
 const app = express()
-
-mongoose.connect().catch(err => {
-  console.error(err)
-  process.exit(1)
-})
 
 /**
  * View engine setup.
@@ -37,21 +36,53 @@ hbs.registerHelper('startsWith', strings.startsWith)
 hbs.registerHelper('replace', strings.replace)
 
 /**
+ * Global middlewares.
+ */
+app.use(helmet()) // security http headers
+
+const limiter = rateLimit({
+  // If your API requires a lot of request change the options.
+  max: 100,
+  windowMs: 1000 * 60 * 60, // 1 hour
+  message: 'Too many requests from this IP, please try again in an hour.'
+})
+app.use('/auth', limiter)
+
+/**
  * Additional middleware.
  */
 app.use(logger('dev'))
+
+app.use(express.json({ limit: '10kb' }))
 app.use(express.urlencoded({ extended: false }))
+app.use(xss())
+
+/**
+ * Serve static files.
+ */
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
-// Sessions should be here.
+/**
+ * Mongoose connection and sanitization.
+ */
+app.use(mongoSanitize())
+mongoose.connect().catch(err => {
+  console.error(err)
+  process.exit(1)
+})
+
+/**
+ * Express session options.
+ */
 const sessionOptions = {
   name: process.env.COOKIE_NAME,
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 30 // one month
+    maxAge: 1000 * 60 * 60 * 24 * 30, // one month
+    httpOnly: true
   }
 }
 app.use(session(sessionOptions))
@@ -63,7 +94,7 @@ app.use((req, res, next) => {
     res.locals.flash = req.session.flash
     delete req.session.flash
   }
-
+  console.log(req.sessionID)
   next()
 })
 
