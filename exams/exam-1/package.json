@@ -21,7 +21,7 @@
   "homepage": "https://github.com/dumihuvud/1dv023-LNU#readme",
   "dependencies": {
     "fetch-cookie": "^0.8.0",
-    "got": "^10.7.0",
+    "got": "^11.8.5",
     "jsdom": "^16.2.1",
     "node-fetch": "^2.6.0",
     "serve-favicon": "^2.5.0"
